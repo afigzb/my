@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioPlayer 组件教程</title>
+    <script type="module" src="../../TeachingComponents/TeachingComponents.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 使用data-source属性自动加载数据 -->
+    <tutorial-component 
+        title="🎵 AudioPlayer 组件教程"
+        description="音频播放器 Web 组件使用指南"
+        theme="prism"
+        data-source="../AudioPlayer/TutorialPage/data.js"
+        initial-chapter="auto-play">
+    </tutorial-component>
+    
+    <script type="module">
+        // 监听章节切换事件
+        document.addEventListener('chapter-changed', (event) => {
+            const { chapterId, chapter } = event.detail;
+            console.log('章节已切换:', chapterId, chapter.title);
+            console.log('包含示例数量:', chapter.examples.length);
+        });
+    </script>
+</body>
+</html>

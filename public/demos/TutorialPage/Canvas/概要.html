@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas概要 - 什么是Canvas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="25" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            pointer-events: none;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            font-weight: 300;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 2.2em;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 24px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .section-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 32px;
+        }
+        
+        .highlight-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .highlight-card h4 {
+            font-size: 1.3em;
+            color: #2d3748;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .demo-section {
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 20px;
+            margin: 48px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .demo-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 16px;
+        }
+        
+        .demo-description {
+            color: #718096;
+            margin-bottom: 32px;
+            font-size: 1.1em;
+        }
+        
+        #demoCanvas {
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin: 24px 0;
+            background: #ffffff;
+        }
+        
+        .canvas-note {
+            color: #a0aec0;
+            font-size: 0.95em;
+            margin-top: 16px;
+            font-style: italic;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+        
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .card p {
+            color: #718096;
+            line-height: 1.7;
+        }
+        
+        .timeline {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 48px;
+            margin: 48px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            pointer-events: none;
+        }
+        
+        .timeline-title {
+            font-size: 2em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-year {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+        
+        .timeline-content {
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+        
+        .comparison-section {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 20px;
+            padding: 48px;
+            margin: 48px 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .comparison-title {
+            font-size: 2em;
+            font-weight: 600;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .tech-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .tech-card.canvas { border-top: 4px solid #48bb78; }
+        .tech-card.svg { border-top: 4px solid #ed64a6; }
+        .tech-card.webgl { border-top: 4px solid #9f7aea; }
+        .tech-card.css { border-top: 4px solid #ed8936; }
+        
+        .tech-card h4 {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 16px;
+        }
+        
+        .tech-feature {
+            margin: 12px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #f7fafc;
+        }
+        
+        .tech-feature:last-child {
+            border-bottom: none;
+        }
+        
+        .tech-feature strong {
+            color: #4a5568;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .feature-list li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        
+        .ecosystem-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .ecosystem-item:hover {
+            transform: translateY(-6px);
+        }
+        
+        .ecosystem-item h4 {
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+        
+        .ecosystem-item p {
+            font-size: 0.95em;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+            }
+            
+            .demo-section, .timeline, .comparison-section {
+                padding: 32px 20px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Canvas 概要</h1>
+            <p>探索HTML5 Canvas的奇妙世界</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">什么是Canvas？</h2>
+                <div class="section-content">
+                    <p>Canvas（画布）是HTML5引入的一个革命性绘图元素，它为Web开发者提供了前所未有的图形处理能力。简单来说，Canvas就像是浏览器中的一张数字画布，开发者可以通过JavaScript在上面自由地绘制各种形状、图像、文字和动画效果。</p>
+                    
+                    <p>与传统的HTML元素不同，Canvas采用基于像素的绘图模式。这意味着一旦在Canvas上绘制了某些内容，它就成为了图像的一个组成部分，就像在真实的画布上作画一样。这种设计哲学使得Canvas能够处理复杂的图形运算和实时渲染任务。</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <h4>💡 核心理念</h4>
+                    <p>Canvas遵循"立即模式图形系统"的设计理念，这与我们熟悉的DOM操作截然不同。在Canvas中，你不是在操作对象，而是在操作像素和路径，这使得它在处理复杂动画和大量图形元素时具有卓越的性能优势。</p>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <h2 class="timeline-title">Canvas的发展历程</h2>
+                <div class="timeline-item">
+                    <div class="timeline-year">2004年</div>
+                    <div class="timeline-content">苹果公司首次在Safari浏览器中引入Canvas元素，最初用于Dashboard widgets的开发。这标志着Web图形处理能力的一个重要转折点。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2005-2009年</div>
+                    <div class="timeline-content">Canvas逐渐被其他主流浏览器采用，包括Firefox、Opera等。开发者社区开始探索Canvas在游戏开发、数据可视化等领域的应用潜力。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2010年</div>
+                    <div class="timeline-content">HTML5标准正式将Canvas纳入规范，确立了其在现代Web开发中的核心地位。同时期，第一批基于Canvas的游戏引擎开始出现。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2010年至今</div>
+                    <div class="timeline-content">Canvas技术不断演进，从最初的2D绘图扩展到WebGL 3D渲染、OffscreenCanvas多线程渲染等高级特性，成为现代Web应用不可或缺的技术基础。</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Canvas的核心作用与价值</h2>
+                <div class="section-content">
+                    <p>在Web技术发展的历程中，Canvas的出现具有里程碑式的意义。它不仅仅是一个绘图工具，更是Web应用向桌面应用看齐的重要技术支撑。</p>
+                    
+                    <p><strong>突破传统Web的限制</strong>：在Canvas出现之前，Web页面主要依赖HTML元素和CSS样式来构建界面，这种方式在处理复杂的图形交互和动画效果时显得力不从心。Canvas的引入彻底改变了这一局面，为Web开发者打开了一扇通往无限创意的大门。</p>
+                    
+                    <p><strong>性能与灵活性的完美结合</strong>：Canvas直接操作GPU进行硬件加速渲染，能够实现60fps的流畅动画效果。同时，它提供了像素级的精确控制能力，使得开发者可以实现任何能够想象到的视觉效果。</p>
+                    
+                    <ul class="feature-list">
+                        <li><strong>数据可视化革命</strong>：从简单的图表到复杂的实时数据仪表板，Canvas让数据以前所未有的方式呈现</li>
+                        <li><strong>Web游戏的兴起</strong>：2D和伪3D游戏可以直接在浏览器中运行，无需任何插件支持</li>
+                        <li><strong>创意工具平台</strong>：在线图像编辑器、绘画工具、设计软件等专业应用的Web化</li>
+                        <li><strong>交互体验升级</strong>：丰富的动画效果、粒子系统、物理模拟等提升了用户体验</li>
+                        <li><strong>实时图像处理</strong>：滤镜效果、人脸识别、增强现实等先进功能的实现</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h3 class="demo-title">Canvas动态演示</h3>
+                <p class="demo-description">下面是一个简单的Canvas动画示例，展示了彩色粒子的动态效果：</p>
+                <canvas id="demoCanvas" width="600" height="300"></canvas>
+                <p class="canvas-note">这个动画完全由Canvas和JavaScript创建，展示了Canvas的实时绘制能力</p>
+            </div>
+            
+            <div class="comparison-section">
+                <h2 class="comparison-title">Canvas vs 其他Web图形技术</h2>
+                <p style="text-align: center; color: #718096; margin-bottom: 16px;">理解Canvas在Web图形技术生态中的位置，有助于我们更好地选择合适的技术方案：</p>
+                
+                <div class="tech-grid">
+                    <div class="tech-card canvas">
+                        <h4>Canvas</h4>
+                        <div class="tech-feature"><strong>优势</strong>：像素级控制、高性能、适合复杂动画</div>
+                        <div class="tech-feature"><strong>适用</strong>：游戏开发、数据可视化、图像处理</div>
+                        <div class="tech-feature"><strong>特点</strong>：基于像素、立即模式、JavaScript控制</div>
+                    </div>
+                    
+                    <div class="tech-card svg">
+                        <h4>SVG</h4>
+                        <div class="tech-feature"><strong>优势</strong>：矢量图形、可缩放、DOM集成</div>
+                        <div class="tech-feature"><strong>适用</strong>：图标系统、简单动画、响应式图形</div>
+                        <div class="tech-feature"><strong>特点</strong>：基于矢量、保留模式、CSS/JS控制</div>
+                    </div>
+                    
+                    <div class="tech-card webgl">
+                        <h4>WebGL</h4>
+                        <div class="tech-feature"><strong>优势</strong>：3D渲染、GPU直接访问、极致性能</div>
+                        <div class="tech-feature"><strong>适用</strong>：3D游戏、科学计算、复杂可视化</div>
+                        <div class="tech-feature"><strong>特点</strong>：基于OpenGL、着色器编程、低级API</div>
+                    </div>
+                    
+                    <div class="tech-card css">
+                        <h4>CSS动画</h4>
+                        <div class="tech-feature"><strong>优势</strong>：简单易用、性能优化、声明式</div>
+                        <div class="tech-feature"><strong>适用</strong>：UI动效、过渡效果、响应式动画</div>
+                        <div class="tech-feature"><strong>特点</strong>：基于属性、硬件加速、浏览器优化</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Canvas的工作原理深度解析</h2>
+                <div class="section-content">
+                    <p>要真正掌握Canvas，我们需要理解其底层的工作机制和设计哲学。</p>
+                    
+                    <p><strong>立即模式图形系统（Immediate Mode Graphics）</strong>：Canvas采用这种渲染模式，具有以下特征：</p>
+                    <ul class="feature-list">
+                        <li><strong>无状态绘制</strong>：每次绘制操作都是独立的，Canvas不会"记住"之前绘制的对象</li>
+                        <li><strong>立即执行</strong>：绘制指令会立即渲染到画布上，没有中间缓存层</li>
+                        <li><strong>全局重绘</strong>：要更新画面内容，通常需要清除整个画布并重新绘制</li>
+                        <li><strong>性能导向</strong>：这种设计使得Canvas能够高效处理大量图形元素</li>
+                    </ul>
+                    
+                    <p><strong>绘图上下文（Rendering Context）</strong>：Canvas本身只是一个容器，真正的绘图功能通过获取绘图上下文来实现。2D上下文提供了完整的2D图形API，而WebGL上下文则提供了3D渲染能力。</p>
+                    
+                    <p><strong>坐标系统</strong>：Canvas使用左上角为原点(0,0)的坐标系统，X轴向右为正，Y轴向下为正。通过变换矩阵可以实现复杂的坐标变换操作。</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Canvas生态系统</h2>
+                <div class="section-content">
+                    <p>Canvas的成功不仅在于其技术特性，更在于围绕它构建的丰富生态系统：</p>
+                </div>
+                
+                <div class="ecosystem-grid">
+                    <div class="ecosystem-item">
+                        <h4>🎮 游戏引擎</h4>
+                        <p>Phaser, PixiJS, Three.js等成熟的游戏引擎</p>
+                    </div>
+                    <div class="ecosystem-item">
+                        <h4>📊 图表库</h4>
+                        <p>Chart.js, D3.js, ECharts等数据可视化工具</p>
+                    </div>
+                    <div class="ecosystem-item">
+                        <h4>🎨 绘图工具</h4>
+                        <p>Fabric.js, Konva.js等图形编辑框架</p>
+                    </div>
+                    <div class="ecosystem-item">
+                        <h4>🧮 科学计算</h4>
+                        <p>TensorFlow.js, GPU.js等机器学习框架</p>
+                    </div>
+                    <div class="ecosystem-item">
+                        <h4>🎬 动画库</h4>
+                        <p>GSAP, Anime.js等专业动画解决方案</p>
+                    </div>
+                    <div class="ecosystem-item">
+                        <h4>🔧 开发工具</h4>
+                        <p>调试器、性能分析器、代码生成器等</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>🎨 丰富的绘图API</h3>
+                    <p>从基础的线条和形状到复杂的路径和变换，Canvas提供了完整而强大的2D绘图功能集。支持文字渲染、图像操作、渐变填充等高级特性。</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ 硬件加速渲染</h3>
+                    <p>基于GPU的硬件加速使Canvas能够实现流畅的60fps动画效果。合理使用离屏Canvas和对象池等技术，可以进一步提升性能表现。</p>
+                </div>
+                <div class="card">
+                    <h3>🔧 像素级精确控制</h3>
+                    <p>直接访问和操作像素数据，实现复杂的图像处理算法。从简单的颜色调整到复杂的滤镜效果，一切都在你的掌控之中。</p>
+                </div>
+                <div class="card">
+                    <h3>🌐 跨平台兼容性</h3>
+                    <p>作为Web标准的一部分，Canvas在所有现代浏览器中都有良好的支持。一次开发，多平台运行，大大降低了开发和维护成本。</p>
+                </div>
+                <div class="card">
+                    <h3>🔄 与Web生态深度集成</h3>
+                    <p>Canvas可以与DOM元素、CSS样式、Web APIs等无缝集成，为构建复杂的Web应用提供了强大的技术基础。</p>
+                </div>
+                <div class="card">
+                    <h3>📱 移动设备优化</h3>
+                    <p>针对移动设备的触摸交互和性能优化，让Canvas应用在手机和平板上也能提供出色的用户体验。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Canvas动画演示
+        const canvas = document.getElementById('demoCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 粒子类
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.radius = Math.random() * 3 + 1;
+                this.hue = Math.random() * 360;
+                this.saturation = 50 + Math.random() * 50;
+                this.lightness = 50 + Math.random() * 30;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // 边界反弹
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                
+                // 保持在画布内
+                this.x = Math.max(0, Math.min(canvas.width, this.x));
+                this.y = Math.max(0, Math.min(canvas.height, this.y));
+                
+                // 色彩变化
+                this.hue += 1;
+                if (this.hue > 360) this.hue = 0;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = 0.8;
+                ctx.fillStyle = `hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%)`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        
+        // 创建粒子
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+        
+        // 动画循环
+        function animate() {
+            // 创建渐变透明效果
+            ctx.fillStyle = 'rgba(248, 249, 250, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 更新和绘制粒子
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            // 绘制连线
+            ctx.strokeStyle = 'rgba(116, 185, 255, 0.3)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 80) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // 启动动画
+        animate();
+    </script>
+</body>
+</html>

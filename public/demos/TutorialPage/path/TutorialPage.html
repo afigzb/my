@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Path 交互式教学</title>
+    <script type="module" src="../../components/TeachingComponents/TeachingComponents.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 使用data-source属性自动加载数据 -->
+    <tutorial-component 
+        title="🎨 SVG Path 交互式教学"
+        description="边学边练，掌握前端强大的图形绘制工具"
+        theme="prism"
+        data-source="../../TutorialPage/path/data.js"
+        initial-chapter="basic-commands">
+    </tutorial-component>
+</body>
+</html>
