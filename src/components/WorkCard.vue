@@ -1,7 +1,7 @@
 <template>
   <router-link 
     :to="`/works/${work.id}`"
-    class="work-card"
+    class="work-card z-20"
   >
     <!-- 图片区域 -->
     <div 

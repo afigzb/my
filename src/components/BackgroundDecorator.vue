@@ -75,14 +75,11 @@ const decorations = computed(() => {
         { cx: 1100, cy: 300, r: 80, gradient: 3, opacity: 0.6, animation: 'animate-float' }
       ],
       paths: [
-        { d: 'M 0,500 Q 300,350 600,480 T 1200,450', stroke: '#a7f3d0', strokeWidth: 3, opacity: 0.7, animation: 'animate-pulse' },
-        { d: 'M 0,600 Q 400,700 800,550 T 1200,580', stroke: '#bef264', strokeWidth: 2, opacity: 0.6, animation: '' },
-        { d: 'M 0,300 Q 200,200 500,320 T 1200,280', stroke: '#84cc16', strokeWidth: 1.5, opacity: 0.5, animation: '' }
+        { d: 'M 0,500 Q 300,350 600,480 T 1200,450', stroke: '#a7f3d0', strokeWidth: 2, opacity: 0.5, animation: '' }
       ],
       dots: [
         { cx: 150, cy: 400, r: 4, fill: '#84cc16', opacity: 0.8, animation: 'animate-ping', style: '' },
-        { cx: 950, cy: 600, r: 6, fill: '#65a30d', opacity: 0.7, animation: 'animate-ping', style: 'animation-delay: 1s;' },
-        { cx: 800, cy: 200, r: 5, fill: '#a3e635', opacity: 0.9, animation: 'animate-ping', style: 'animation-delay: 2s;' }
+        { cx: 950, cy: 600, r: 6, fill: '#65a30d', opacity: 0.7, animation: 'animate-ping', style: 'animation-delay: 1s;' }
       ],
       polygons: [
         { points: '100,600 140,550 180,600', fill: '#ecfccb', opacity: 0.7, animation: 'animate-float' },
@@ -98,13 +95,11 @@ const decorations = computed(() => {
         { cx: 1100, cy: 600, r: 90, gradient: 2, opacity: 0.4, animation: '' }
       ],
       paths: [
-        { d: 'M 0,400 Q 200,300 500,380 T 1200,350', stroke: '#a7f3d0', strokeWidth: 2, opacity: 0.7, animation: '' },
-        { d: 'M 0,450 Q 300,550 700,420 T 1200,400', stroke: '#bef264', strokeWidth: 1.5, opacity: 0.6, animation: '' }
+        { d: 'M 0,400 Q 200,300 500,380 T 1200,350', stroke: '#a7f3d0', strokeWidth: 1.5, opacity: 0.5, animation: '' }
       ],
       dots: [
         { cx: 250, cy: 250, r: 3, fill: '#84cc16', opacity: 0.7, animation: '', style: '' },
-        { cx: 800, cy: 500, r: 5, fill: '#65a30d', opacity: 0.6, animation: '', style: '' },
-        { cx: 950, cy: 200, r: 4, fill: '#a3e635', opacity: 0.8, animation: '', style: '' }
+        { cx: 800, cy: 500, r: 5, fill: '#65a30d', opacity: 0.6, animation: '', style: '' }
       ],
       polygons: [
         { points: '150,500 180,470 210,500', fill: '#ecfccb', opacity: 0.7, animation: '' },
@@ -118,17 +113,14 @@ const decorations = computed(() => {
         { cx: 1050, cy: 450, r: 120, gradient: 2, opacity: 0.3, animation: '' }
       ],
       paths: [
-        { d: 'M 0,300 Q 300,200 600,280 T 1200,250', stroke: '#a7f3d0', strokeWidth: 2, opacity: 0.6, animation: '' },
-        { d: 'M 0,320 Q 400,420 800,300 T 1200,280', stroke: '#bef264', strokeWidth: 1.5, opacity: 0.5, animation: '' }
+        { d: 'M 0,300 Q 300,200 600,280 T 1200,250', stroke: '#a7f3d0', strokeWidth: 1.5, opacity: 0.4, animation: '' }
       ],
       dots: [
         { cx: 300, cy: 180, r: 4, fill: '#84cc16', opacity: 0.6, animation: '', style: '' },
-        { cx: 700, cy: 380, r: 6, fill: '#65a30d', opacity: 0.5, animation: '', style: '' },
-        { cx: 900, cy: 120, r: 3, fill: '#a3e635', opacity: 0.7, animation: '', style: '' }
+        { cx: 700, cy: 380, r: 6, fill: '#65a30d', opacity: 0.5, animation: '', style: '' }
       ],
       polygons: [
-        { points: '80,400 120,350 160,400', fill: '#ecfccb', opacity: 0.6, animation: '' },
-        { points: '950,200 990,180 1030,220', fill: '#d9f99d', opacity: 0.5, animation: '' }
+        { points: '80,400 120,350 160,400', fill: '#ecfccb', opacity: 0.6, animation: '' }
       ],
       rects: []
     }

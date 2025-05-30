@@ -1,3 +1,14 @@
+@keyframes verticalPulse {
+  0%, 100% {
+    opacity: 0.6;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(0.5px);
+  }
+}
+
 /* 通用动画定义 */
 @keyframes fadeInUp {
   from {
@@ -43,22 +54,71 @@
   }
 }
 
+/* 淡入骨架屏动画 */
+@keyframes skeleton {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
 /* 动画类 */
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
   opacity: 0;
 }
 
+/* 懒加载动画 */
+.animate-fade-in-up.lazy-load {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-fade-in-up.lazy-load.animate-start {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 简化的动画（仅关键元素使用） */
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-float-reverse {
   animation: floatReverse 8s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-scroll-indicator {
   animation: scrollIndicator 2s ease-in-out infinite;
+}
+
+.animate-vertical-pulse {
+  animation: verticalPulse 4s ease-in-out infinite;
+}
+
+/* 骨架屏 */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: skeleton 1.5s infinite linear;
+}
+
+/* 内容占位符 */
+.content-placeholder {
+  background: #f5f5f5;
+  border-radius: 4px;
+  min-height: 20px;
+}
+
+/* 性能优化 */
+.perf-optimized {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* 通用样式 */
@@ -109,10 +169,31 @@
     @apply py-16;
   }
   
-  /* 移动端隐藏部分装饰元素 */
+  /* 移动端隐藏部分装饰元素以提升性能 */
   svg circle:nth-child(n+4),
   svg polygon:nth-child(n+3),
   svg rect:nth-child(n+2) {
     display: none;
+  }
+  
+  /* 移动端简化动画 */
+  .animate-float,
+  .animate-float-reverse {
+    animation: none;
+  }
+}
+
+/* 减少动画偏好设置 */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-float,
+  .animate-float-reverse,
+  .animate-vertical-pulse {
+    animation: none;
+  }
+  
+  .animate-fade-in-up.lazy-load {
+    opacity: 1;
+    transform: translateY(0);
   }
 } 
