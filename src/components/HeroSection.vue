@@ -152,7 +152,7 @@ const loadDragFollowComponent = async () => {
     try {
       const script = document.createElement('script')
       script.type = 'module'
-      script.src = '/demos/components/FocusDiv/FocusDiv.js'
+      script.src = '/src/OldComponents/components/FocusDiv/FocusDiv.js'
       document.head.appendChild(script)
     } catch (error) {
       console.warn('Failed to load drag-follow component:', error)

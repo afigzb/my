@@ -1,4 +1,4 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js';
+import { LitElement, html } from 'lit';
 import { AudioPlayerController, AudioPlayerData, PlayerUtils, AUDIO_CONFIG, IconService } from './AudioPlayerController.js';
 import audioPlayerStyles from './AudioPlayerStyle.js';
 

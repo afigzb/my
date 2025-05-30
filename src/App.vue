@@ -27,7 +27,7 @@ const onAfterEnter = () => {
 onMounted(() => {
   // 动态导入光标效果脚本
   const script = document.createElement('script')
-  script.src = '/demos/components/CursorShape/newCursor2.js'
+  script.src = '/src/OldComponents/components/CursorShape/newCursor2.js'
   script.onload = () => {
     // 脚本加载完成后初始化光标
     if (window.FluidCursor) {

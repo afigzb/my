@@ -25,6 +25,7 @@
  * factory.init().update(data, { stack: 'total', areaStyle: true });
  * ```
  */
+import * as echarts from '/node_modules/echarts/dist/echarts.esm.js';
 
 import { themes, toolboxConfigs, presetConfigurations } from '../config/themes.js';
 

@@ -1,4 +1,4 @@
-import { css } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js';
+import { css } from 'lit';
 
 export default [
     css`
@@ -30,7 +30,7 @@ button {
 .player-ball {
     width: 64px;
     height: 64px;
-    background-image: url('/demos/components/AudioPlayer/img/黑胶唱片.png');
+    background-image: url('/src/OldComponents/components/AudioPlayer/img/黑胶唱片.png');
     background-size: cover;
     background-position: center;
     box-shadow: 0 4px 12px var(--shadow);

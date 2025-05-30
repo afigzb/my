@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js';
+import { LitElement, html, css } from 'lit';
 
 // 动画常量配置，提取到组件外部以便更好地组织
 const ANIMATION_CONSTANTS = {

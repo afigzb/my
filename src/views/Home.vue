@@ -91,7 +91,7 @@
     <draggable-container initial-x-percent="90" initial-y-percent="85">
       <audio-player
         :playlist="musicPlaylist"
-        audio-base-path="/demos/components/AudioPlayer/audio/"
+        audio-base-path="/src/OldComponents/components/AudioPlayer/audio/"
         initial-volume="40"
         auto-play="false"
         initial-play-mode="LIST_LOOP"
@@ -146,9 +146,9 @@ const scrollToSection = (sectionClass) => {
 
 // Web Components 动态加载配置
 const webComponents = [
-  { name: 'sliding-damping', path: '/demos/components/SlidingDamping/SlidingDamping.js' },
-  { name: 'draggable-container', path: '/demos/components/DragDropContainer/DragDropContainer.js' },
-  { name: 'audio-player', path: '/demos/components/AudioPlayer/src/AudioPlayer.js' }
+  { name: 'sliding-damping', path: '/src/OldComponents/components/SlidingDamping/SlidingDamping.js' },
+  { name: 'draggable-container', path: '/src/OldComponents/components/DragDropContainer/DragDropContainer.js' },
+  { name: 'audio-player', path: '/src/OldComponents/components/AudioPlayer/src/AudioPlayer.js' }
 ]
 
 // 动态加载 Web Components
