@@ -91,7 +91,7 @@
     <draggable-container initial-x-percent="90" initial-y-percent="85">
       <audio-player
         :playlist="musicPlaylist"
-        audio-base-path="/src/OldComponents/components/AudioPlayer/audio/"
+        audio-base-path="./src/OldComponents/components/AudioPlayer/audio/"
         initial-volume="40"
         auto-play="false"
         initial-play-mode="LIST_LOOP"
@@ -144,32 +144,21 @@ const scrollToSection = (sectionClass) => {
   }
 }
 
-// Web Components 动态加载配置
-const webComponents = [
-  { name: 'sliding-damping', path: '/src/OldComponents/components/SlidingDamping/SlidingDamping.js' },
-  { name: 'draggable-container', path: '/src/OldComponents/components/DragDropContainer/DragDropContainer.js' },
-  { name: 'audio-player', path: '/src/OldComponents/components/AudioPlayer/src/AudioPlayer.js' }
-]
-
 // 动态加载 Web Components
 const loadWebComponents = async () => {
-  for (const component of webComponents) {
-    if (!customElements.get(component.name)) {
-      try {
-        const script = document.createElement('script')
-        script.type = 'module'
-        script.src = component.path
-        document.head.appendChild(script)
-        
-        // 等待组件加载完成
-        await new Promise((resolve) => {
-          script.onload = resolve
-          script.onerror = resolve
-        })
-      } catch (error) {
-        console.warn(`Failed to load component: ${component.name}`, error)
-      }
+  try {
+    // 使用 ES 模块导入替代动态脚本加载
+    if (!customElements.get('sliding-damping')) {
+      await import('../OldComponents/components/SlidingDamping/SlidingDamping.js')
     }
+    if (!customElements.get('draggable-container')) {
+      await import('../OldComponents/components/DragDropContainer/DragDropContainer.js')
+    }
+    if (!customElements.get('audio-player')) {
+      await import('../OldComponents/components/AudioPlayer/src/AudioPlayer.js')
+    }
+  } catch (error) {
+    console.warn('Failed to load Web Components:', error)
   }
 }
 

@@ -150,10 +150,7 @@ const skills = ['Vue.js', 'React', 'TypeScript', 'Node.js', 'Python']
 const loadDragFollowComponent = async () => {
   if (!customElements.get('drag-follow')) {
     try {
-      const script = document.createElement('script')
-      script.type = 'module'
-      script.src = '/src/OldComponents/components/FocusDiv/FocusDiv.js'
-      document.head.appendChild(script)
+      await import('../OldComponents/components/FocusDiv/FocusDiv.js')
     } catch (error) {
       console.warn('Failed to load drag-follow component:', error)
     }

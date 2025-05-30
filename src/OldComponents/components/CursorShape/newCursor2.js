@@ -279,6 +279,10 @@ if (typeof module !== 'undefined' && module.exports) {
 // 全局变量
 window.FluidCursor = FluidCursor;
 
+// ES 模块导出
+export { FluidCursor };
+export default FluidCursor;
+
 // 兼容原有的初始化方式（如果页面中有canvas#canvas元素）
 window.addEventListener('DOMContentLoaded', () => {
     const existingCanvas = document.getElementById('canvas');

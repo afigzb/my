@@ -24,19 +24,18 @@ const onAfterEnter = () => {
 }
 
 // 初始化流体光标
-onMounted(() => {
-  // 动态导入光标效果脚本
-  const script = document.createElement('script')
-  script.src = '/src/OldComponents/components/CursorShape/newCursor2.js'
-  script.onload = () => {
-    // 脚本加载完成后初始化光标
-    if (window.FluidCursor) {
-      fluidCursor = new window.FluidCursor().init()
+onMounted(async () => {
+  try {
+    // 使用 ES 模块导入
+    const { FluidCursor } = await import('./OldComponents/components/CursorShape/newCursor2.js')
+    if (FluidCursor) {
+      fluidCursor = new FluidCursor().init()
       // 暴露到全局方便调试
       window.fluidCursor = fluidCursor
     }
+  } catch (error) {
+    console.warn('Failed to load FluidCursor:', error)
   }
-  document.head.appendChild(script)
 })
 
 // 销毁流体光标
