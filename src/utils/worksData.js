@@ -7,7 +7,7 @@ export const worksData = [
     demoUrl: '/demos/TutorialPage/path/TutorialPage.html',
     createDate: '2024-01-20',
     tags: ['SVG', 'Interactive', '图形'],
-    image: null
+    image: '/img/svg.png'
   },
   {
     id: 'echarts-factory',
@@ -16,7 +16,7 @@ export const worksData = [
     demoUrl: '/demos/components/Echarts/test.html',
     createDate: '2024-02-10',
     tags: ['ECharts', 'Factory Pattern', 'Data Visualization'],
-    image: null
+    image: '/img/echarts.png'
   },
   {
     id: 'tetris-game',
@@ -25,7 +25,7 @@ export const worksData = [
     demoUrl: '/demos/TutorialPage/Canvas/基础教学/俄罗斯方块.html',
     createDate: '2024-02-25',
     tags: ['Game', 'Canvas', 'Classic'],
-    image: null
+    image: '/img/俄罗斯方块.png'
   },
   {
     id: 'sliding-damping',
@@ -34,7 +34,7 @@ export const worksData = [
     demoUrl: '/demos/components/SlidingDamping/SlidingDamping.html',
     createDate: '2024-02-01',
     tags: ['Web Components', 'Scroll', 'Physics'],
-    image: null
+    image: '/img/SlidingDamping.png'
   },
   {
     id: 'text-effects',
@@ -43,7 +43,7 @@ export const worksData = [
     demoUrl: '/demos/TutorialPage/用阴影实现描边效果.html',
     createDate: '2024-01-15',
     tags: ['CSS', 'Text Effects', '教学'],
-    image: null // 暂时为空，会显示默认背景
+    image: '/img/文字效果.png'
   },
   {
     id: 'canvas-tutorial',
@@ -52,7 +52,7 @@ export const worksData = [
     demoUrl: '/demos/TutorialPage/Canvas/CanvasTutorialPage.html',
     createDate: '2024-01-25',
     tags: ['Canvas', 'Animation', 'Graphics'],
-    image: null
+    image: '/img/canvas.png'
   },
   {
     id: 'metaball-effect',
@@ -61,7 +61,7 @@ export const worksData = [
     demoUrl: '/demos/components/MetaballEffect/MetaballEffect-Tutorial.html',
     createDate: '2024-02-05',
     tags: ['CSS Filter', 'Visual Effects', '原理'],
-    image: null
+    image: '/img/融球效果.png'
   },
 
   {
@@ -71,7 +71,7 @@ export const worksData = [
     demoUrl: '/demos/components/AudioPlayer/TutorialPage/TutorialPage.html',
     createDate: '2024-02-15',
     tags: ['Web Components', 'Audio', 'Tutorial'],
-    image: null
+    image: '/img/AudioPlayer.png'
   },
   {
     id: 'codeeditor-tutorial',
@@ -80,7 +80,7 @@ export const worksData = [
     demoUrl: '/demos/components/CodeEditorPreview/TutorialPage/TutorialPage.html',
     createDate: '2024-02-18',
     tags: ['Code Editor', 'Preview', 'Tutorial'],
-    image: null
+    image: '/img/CodeEditorPreview.png'
   },
   {
     id: 'fault-text-effect',
@@ -89,7 +89,7 @@ export const worksData = [
     demoUrl: '/demos/components/FaultTextEffect/index.html',
     createDate: '2024-02-20',
     tags: ['Text Effects', 'Animation', 'Glitch'],
-    image: null
+    image: '/img/故障文字.png'
   },
   {
     id: 'metaball-component',
@@ -98,7 +98,7 @@ export const worksData = [
     demoUrl: '/demos/components/MetaballEffect/MetaballEffect.html',
     createDate: '2024-02-22',
     tags: ['Web Components', 'Visual Effects', 'Interactive'],
-    image: null
+    image: '/img/融球效果.png'
   },
 
   {
@@ -108,7 +108,7 @@ export const worksData = [
     demoUrl: '/demos/TutorialPage/Canvas/基础教学/雷霆战机.html',
     createDate: '2024-02-28',
     tags: ['Game', 'Canvas', 'Shooter'],
-    image: null
+    image: '/img/雷霆战机.png'
   }
 ]
 

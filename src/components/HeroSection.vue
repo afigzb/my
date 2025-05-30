@@ -74,7 +74,7 @@
 
         <!-- CTA 按钮 - 添加回弹效果 -->
         <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style="animation-delay: 1.2s;">
-          <!-- 主要按钮 - 双层回弹 -->
+          <!-- 主要按钮 -->
           <drag-follow 
             max-offset="20" 
             follow-speed="0.01" 
@@ -84,29 +84,14 @@
             bounce-threshold="0.3"
           >
             <button 
-              class="button-primary relative inline-flex items-center justify-center w-[200px] h-[48px]"
-              @click="$emit('scroll-to-works')"
+              class="button-primary px-8 py-3"
+              @click="navigateToWorks"
             >
-              <div class="absolute">
-                <drag-follow 
-                  max-offset="15" 
-                  follow-speed="0.008" 
-                  spring-constant="0.8" 
-                  damping-factor="0.25" 
-                  maxBounceTimes="10" 
-                  bounce-threshold="0.2"
-                >
-                  <div class="relative w-[200px] h-[48px] flex items-center justify-center">
-                    <div class="absolute">
-                      查看我的作品
-                    </div>
-                  </div>
-                </drag-follow>
-              </div>
+              查看我的作品
             </button>
           </drag-follow>
 
-          <!-- 次要按钮 - 双层回弹 -->
+          <!-- 次要按钮 -->
           <drag-follow 
             max-offset="20" 
             follow-speed="0.01" 
@@ -116,25 +101,10 @@
             bounce-threshold="0.3"
           >
             <button 
-              class="button-secondary relative inline-flex items-center justify-center w-[180px] h-[48px]"
-              @click="$emit('scroll-to-skills')"
+              class="button-secondary px-8 py-3"
+              @click="navigateToSkills"
             >
-              <div class="absolute">
-                <drag-follow 
-                  max-offset="15" 
-                  follow-speed="0.008" 
-                  spring-constant="0.8" 
-                  damping-factor="0.25" 
-                  maxBounceTimes="10" 
-                  bounce-threshold="0.2"
-                >
-                  <div class="relative w-[180px] h-[48px] flex items-center justify-center">
-                    <div class="absolute">
-                      了解技能
-                    </div>
-                  </div>
-                </drag-follow>
-              </div>
+              了解技能
             </button>
           </drag-follow>
         </div>
@@ -152,16 +122,24 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import BackgroundDecorator from './BackgroundDecorator.vue'
 import { usePageAnimations } from '../composables/usePageAnimations.js'
 
-// 定义事件
-defineEmits(['scroll-to-works', 'scroll-to-skills'])
-
+const router = useRouter()
 const heroSection = ref(null)
 
 // 技能列表
 const skills = ['Vue.js', 'JavaScript', '‌Ant Design', 'webComponent', 'C#']
+
+// 页面跳转方法
+const navigateToWorks = () => {
+  router.push('/works')
+}
+
+const navigateToSkills = () => {
+  router.push('/skills')
+}
 
 // 计算粒子样式
 const getParticleStyle = (index) => {

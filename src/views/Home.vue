@@ -5,10 +5,7 @@
       <div class="global-vertical-line animate-vertical-pulse"></div>
 
       <!-- Hero 区域 - 立即加载 -->
-      <HeroSection 
-        @scroll-to-works="scrollToSection('.works-section')"
-        @scroll-to-skills="scrollToSection('.skills-section')"
-      />
+      <HeroSection />
 
       <!-- 技能展示区域 - 懒加载 -->
       <div class="skills-section" data-section="skills" ref="skillsRef">
@@ -137,22 +134,6 @@ const musicPlaylist = [
   { id: 'track3', title: 'yutaka hirasaka - eternal moment', filename: 'yutaka hirasaka - eternal moment.mp3' },
   { id: 'track4', title: 'Saiakoup - Afterglow', filename: 'Saiakoup - Afterglow.mp3' }
 ]
-
-// 平滑滚动到指定区域
-const scrollToSection = (sectionClass) => {
-  const element = document.querySelector(sectionClass)
-  if (element) {
-    // 获取元素相对于页面顶部的位置
-    const elementRect = element.getBoundingClientRect()
-    const absoluteElementTop = elementRect.top + window.pageYOffset
-    
-    // 滚动到指定位置
-    window.scrollTo({
-      top: absoluteElementTop - 80, // 减去导航栏高度
-      behavior: 'smooth'
-    })
-  }
-}
 
 // 智能懒加载策略
 const setupIntersectionObserver = () => {
