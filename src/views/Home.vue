@@ -3,37 +3,50 @@
     <!-- 滚动阻尼容器 -->
     <sliding-damping damping="0.03" touch-damping="0.15" limit-speed="100">
       <!-- Hero 区域 -->
-      <section class="min-h-screen bg-black text-white flex items-center">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div class="text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">
-              你好，我是 [姓名]
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-2xl mx-auto">
-              前端开发工程师 | 专注于创建优秀的用户体验
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection 
+        @scroll-to-works="scrollToSection('.works-section')"
+        @scroll-to-skills="scrollToSection('.skills-section')"
+      />
+
+      <!-- 技能展示区域 -->
+      <div class="skills-section">
+        <SkillsSection />
+      </div>
 
       <!-- 作品展示预览 -->
-      <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section class="section-base bg-white works-section">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="text-4xl font-bold text-black mb-4">精选作品</h2>
             <p class="text-xl text-gray-600">展示我最近的一些项目作品</p>
           </div>
           
           <!-- 作品网格 -->
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="grid grid-cols-2 gap-8">
             <WorkCard 
               v-for="work in featuredWorks" 
               :key="work.id" 
               :work="work"
             />
           </div>
+
+          <!-- 查看全部按钮 -->
+          <div class="text-center mt-12">
+            <router-link 
+              to="/works" 
+              class="button-secondary inline-flex items-center"
+            >
+              查看全部作品
+            </router-link>
+          </div>
         </div>
       </section>
+
+      <!-- 关于我区域 -->
+      <AboutSection />
+
+      <!-- 服务展示区域 -->
+      <ServicesSection />
     </sliding-damping>
 
     <!-- 可拖拽的音乐播放器 -->
@@ -52,50 +65,62 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { worksData } from '../utils/worksData.js'
+import { usePageAnimations } from '../composables/usePageAnimations.js'
 import WorkCard from '../components/WorkCard.vue'
+import HeroSection from '../components/HeroSection.vue'
+import SkillsSection from '../components/SkillsSection.vue'
+import AboutSection from '../components/AboutSection.vue'
 
-// 获取所有作品（显示6张卡片）
-const featuredWorks = computed(() => worksData.slice(0, 6))
+// 获取精选作品（显示4张卡片）
+const featuredWorks = computed(() => worksData.slice(0, 4))
 
-// 音乐播放列表 - 使用实际存在的音频文件
+// 音乐播放列表配置
 const musicPlaylist = [
-  {
-    id: 'track1',
-    title: 'July - Rhapsody',
-    src: 'July - Rhapsody.mp3'
-  },
-  {
-    id: 'track2', 
-    title: 'iwamizu - Love at First Sight',
-    src: 'iwamizu - Love at First Sight.mp3'
-  },
-  {
-    id: 'track3',
-    title: 'yutaka hirasaka - eternal moment', 
-    src: 'yutaka hirasaka - eternal moment.mp3'
-  },
-  {
-    id: 'track4',
-    title: 'Saiakoup - Afterglow',
-    src: 'Saiakoup - Afterglow.mp3'
-  }
+  { id: 'track1', title: 'July - Rhapsody', src: 'July - Rhapsody.mp3' },
+  { id: 'track2', title: 'iwamizu - Love at First Sight', src: 'iwamizu - Love at First Sight.mp3' },
+  { id: 'track3', title: 'yutaka hirasaka - eternal moment', src: 'yutaka hirasaka - eternal moment.mp3' },
+  { id: 'track4', title: 'Saiakoup - Afterglow', src: 'Saiakoup - Afterglow.mp3' }
 ]
 
+// 平滑滚动到指定区域
+const scrollToSection = (sectionClass) => {
+  const element = document.querySelector(sectionClass)
+  if (element) {
+    element.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }
+}
+
+// Web Components 动态加载配置
+const webComponents = [
+  { name: 'sliding-damping', path: '../../public/demos/components/SlidingDamping/SlidingDamping.js' },
+  { name: 'draggable-container', path: '../../public/demos/components/DragDropContainer/DragDropContainer.js' },
+  { name: 'audio-player', path: '../../public/demos/components/AudioPlayer/src/AudioPlayer.js' }
+]
+
+// 动态加载 Web Components
+const loadWebComponents = async () => {
+  for (const component of webComponents) {
+    if (!customElements.get(component.name)) {
+      try {
+        await import(component.path)
+      } catch (error) {
+        console.warn(`Failed to load component: ${component.name}`, error)
+      }
+    }
+  }
+}
+
+// 使用动画管理（启用滚动效果）
+usePageAnimations({
+  enableScrollEffects: true,
+  staggerDelay: 0.15
+})
+
 onMounted(() => {
-  // 动态加载滚动阻尼组件
-  if (!customElements.get('sliding-damping')) {
-    import('../../public/demos/components/SlidingDamping/SlidingDamping.js')
-  }
-  
-  // 动态加载拖拽组件
-  if (!customElements.get('draggable-container')) {
-    import('../../public/demos/components/DragDropContainer/DragDropContainer.js')
-  }
-  
-  // 动态加载音乐播放器组件
-  if (!customElements.get('audio-player')) {
-    import('../../public/demos/components/AudioPlayer/src/AudioPlayer.js')
-  }
+  loadWebComponents()
 })
 </script>
 
@@ -109,7 +134,7 @@ sliding-damping {
   z-index: 1;
 }
 
-/* 拖拽容器样式调整 */
+/* 拖拽容器层级调整 */
 draggable-container {
   z-index: 10000;
 }
@@ -124,13 +149,8 @@ draggable-container audio-player {
   margin-top: 0;
 }
 
-/* 针对滚动阻尼容器内的内容调整 */
-sliding-damping .min-h-screen {
-  min-height: 100vh;
-}
-
-/* 确保滚动阻尼不影响导航栏 */
-:host {
-  position: relative;
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
 }
 </style> 

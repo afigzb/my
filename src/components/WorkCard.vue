@@ -11,9 +11,7 @@
       :style="backgroundStyle"
     >
       <div class="image-overlay">
-        <div class="work-category">
-          {{ work.tags[0] }}
-        </div>
+
       </div>
     </div>
 
@@ -107,6 +105,7 @@ const resetTransform = () => {
   overflow: hidden;
   transition: transform 0.2s ease-out;
   transform-style: preserve-3d;
+  margin-bottom: 32px;
 }
 
 .image-overlay {
@@ -122,18 +121,8 @@ const resetTransform = () => {
   padding: 20px;
 }
 
-.work-category {
-  font-size: 1rem;
-  font-weight: 500;
-  color: white;
-  background: rgba(22, 163, 74, 0.8);
-  padding: 6px 16px;
-  border-radius: 0;
-  backdrop-filter: blur(10px);
-}
-
 .content {
-  padding: 32px;
+  padding: 4px;
   background: white;
 }
 
@@ -150,6 +139,12 @@ const resetTransform = () => {
   line-height: 1.6;
   margin-bottom: 20px;
   font-size: 1.1rem;
+  height: 3.2em; /* 固定高度为两行文本 */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 限制为两行 */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 .tags {

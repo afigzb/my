@@ -30,7 +30,7 @@ button {
 .player-ball {
     width: 64px;
     height: 64px;
-    background-image: url('../img/黑胶唱片.png');
+    background-image: url('/demos/components/AudioPlayer/img/黑胶唱片.png');
     background-size: cover;
     background-position: center;
     box-shadow: 0 4px 12px var(--shadow);
