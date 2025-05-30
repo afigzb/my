@@ -35,6 +35,41 @@ a {
   text-decoration: none;
 }
 
+/* 统一的间距和布局组件类 */
+@layer components {
+  .section-base {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+  
+  .container-spacing {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .title-spacing {
+    @apply mb-4;
+  }
+  
+  .subtitle-spacing {
+    @apply mb-3;
+  }
+  
+  .content-spacing {
+    @apply mb-6;
+  }
+  
+  .section-gap {
+    @apply mb-12 md:mb-16 lg:mb-20;
+  }
+  
+  .card-spacing {
+    @apply p-4 md:p-6;
+  }
+  
+  .text-comfortable {
+    @apply leading-relaxed;
+  }
+}
+
 #fluid-cursor-canvas {
   position: fixed !important;
   top: 0 !important;

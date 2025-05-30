@@ -1,7 +1,7 @@
 <template>
-  <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-    <div class="nav-capsule bg-white/60 backdrop-blur-xl border border-white/20 rounded-full px-6 py-3 shadow-lg shadow-black/5">
-      <div class="flex space-x-8">
+  <nav class="fixed top-8 left-1/2 transform -translate-x-1/2 z-50">
+    <div class="nav-capsule bg-white/60 backdrop-blur-xl border border-white/20 rounded-full px-8 py-4 shadow-lg shadow-black/5">
+      <div class="flex space-x-10">
         <router-link 
           to="/" 
           class="nav-link group relative"
@@ -45,7 +45,7 @@
 }
 
 .nav-link {
-  @apply px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 rounded-full;
+  @apply px-5 py-3 text-sm font-medium text-gray-700 transition-all duration-200 rounded-full;
 }
 
 .nav-link:hover {

@@ -17,7 +17,7 @@
           <!-- 左侧内容 -->
           <div>
             <!-- 核心价值卡片 -->
-            <div class="grid gap-6 mb-8">
+            <div class="grid gap-6 mb-10">
               <div v-for="value in coreValues" :key="value.title" 
                 class="card-base card-hover">
                 <div class="flex items-center mb-4">
@@ -28,7 +28,7 @@
                   </div>
                   <h3 class="text-lg font-medium text-gray-800">{{ value.title }}</h3>
                 </div>
-                <p class="text-sm text-gray-600">{{ value.description }}</p>
+                <p class="text-sm text-gray-600 leading-relaxed">{{ value.description }}</p>
               </div>
             </div>
 

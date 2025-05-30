@@ -32,15 +32,15 @@
       </div>
 
       <!-- 作品展示预览 - 部分懒加载 -->
-      <section class="section-base bg-white works-section" data-section="works" ref="worksRef">
+      <section class="section-base bg-white works-section py-12" data-section="works" ref="worksRef">
         <div class="mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-16">
+          <div class="text-center mb-12">
             <h2 class="text-4xl font-bold text-black mb-4 animate-fade-in-up">精选作品</h2>
             <p class="text-xl text-gray-600 animate-fade-in-up">展示我最近的一些项目作品</p>
           </div>
           
           <!-- 作品网格 - 轻量级组件，可以直接加载 -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
             <WorkCard 
               v-for="work in featuredWorks" 
               :key="work.id" 
@@ -50,7 +50,7 @@
           </div>
 
           <!-- 查看全部按钮 -->
-          <div class="text-center mt-12">
+          <div class="text-center">
             <router-link 
               to="/works" 
               class="button-secondary inline-flex items-center animate-fade-in-up"
@@ -221,7 +221,7 @@ onMounted(() => {
 <style scoped>
 /* 加载占位符样式 */
 .loading-placeholder {
-  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
 }
 
 /* 全局竖向连接线 */

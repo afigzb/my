@@ -1,14 +1,14 @@
 <template>
   <!-- 展示区域 -->
   <section class="section-base" ref="skillsSection">
-    <div class="mx-auto pt-32 sm:px-6 lg:px-8">
+    <div class="mx-auto pt-16 sm:px-6 lg:px-8">
       <!-- 第一个水平滚动容器 - 正向滚动 -->
       <div 
         ref="scrollContainer1"
-        class="skills-scroll-container overflow-x-auto mb-16"
+        class="skills-scroll-container overflow-x-auto mb-12"
       >
         <div class="skills-wrapper flex gap-12 pb-6">
-          <drag-follow
+          <drag-follow 
             v-for="skill in skills" 
             :key="skill.name + '-1'"
             max-offset="15" 
@@ -34,7 +34,7 @@
       <!-- 第二个水平滚动容器 - 反向滚动 -->
       <div 
         ref="scrollContainer2"
-        class="skills-scroll-container overflow-x-auto mb-16"
+        class="skills-scroll-container overflow-x-auto mb-12"
       >
         <div class="skills-wrapper flex gap-12 pb-6 h-full">
           <drag-follow
@@ -62,7 +62,7 @@
     </div>
 
     <!-- 内容区域 -->
-    <div class="relative py-20">
+    <div class="relative py-16">
       <!-- 背景装饰 -->
       <BackgroundDecorator variant="skills" />
       
@@ -75,8 +75,10 @@
         </div>
         
         <!-- 设计理念卡片 -->
-        <div class="grid md:grid-cols-3 gap-8">
-          <div v-for="concept in designConcepts" :key="concept.title"
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+          <div 
+          v-for="concept in designConcepts" 
+          :key="concept.title"
             class="card-base card-hover">
             <div class="w-12 h-12 bg-lime-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-lime-100">
               <svg class="w-6 h-6 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,16 +86,16 @@
               </svg>
             </div>
             <h4 class="text-lg font-medium text-gray-800 mb-2">{{ concept.title }}</h4>
-            <p class="text-sm text-gray-600">{{ concept.description }}</p>
+            <p class="text-sm text-gray-600 leading-relaxed">{{ concept.description }}</p>
           </div>
         </div>
         
         <!-- 装饰性引用 -->
-        <div class="mt-16">
-          <blockquote class="text-lg text-gray-500 font-light italic">
+        <div>
+          <blockquote class="text-lg text-gray-500 font-light italic mb-2">
             "简洁是最终的复杂"
           </blockquote>
-          <cite class="text-sm text-gray-400 mt-2 block">— Leonardo da Vinci</cite>
+          <cite class="text-sm text-gray-400 block">— Leonardo da Vinci</cite>
         </div>
       </div>
     </div>

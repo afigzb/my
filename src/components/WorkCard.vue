@@ -1,7 +1,7 @@
 <template>
   <router-link 
     :to="`/works/${work.id}`"
-    class="work-card z-20"
+    class="work-card  z-20"
   >
     <!-- 图片区域 -->
     <div 
@@ -10,9 +10,6 @@
       @mouseleave="resetTransform"
       :style="backgroundStyle"
     >
-      <div class="image-overlay">
-
-      </div>
     </div>
 
     <!-- 内容区域 -->
@@ -92,83 +89,51 @@ const resetTransform = () => {
   text-decoration: none;
   transition: all 0.3s ease;
   overflow: hidden;
-  background: white/60;
-  backdrop-filter: blur(4px);
-  border-radius: 1rem;
-  border: 1px solid rgb(229, 231, 235);
 }
 
 .image-container {
   height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease-out;
   transform-style: preserve-3d;
-  margin-bottom: 24px;
-  border-radius: 1rem;
-}
-
-.image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 20px;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .content {
-  padding: 20px;
-  background: transparent;
+  padding: 1.25rem;
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 600;
   color: #374151;
-  margin-bottom: 12px;
-  line-height: 1.4;
+  margin-bottom: 0.5rem;
 }
 
 .description {
   color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.5;
+  margin-bottom: 1rem;
   font-size: 0.875rem;
-  height: 3.2em; /* 固定高度为两行文本 */
-  overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 限制为两行 */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .tag {
   background: #f0fdf4;
-  color: #16a34a;
-  padding: 4px 12px;
-  border: 1px solid #bbf7d0;
-  border-radius: 9999px;
+  color: #059669;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
   font-size: 0.75rem;
   font-weight: 500;
-}
-
-.tag:first-child {
-  background: #ecfdf5;
-  color: #059669;
-  border-color: #a7f3d0;
 }
 </style> 

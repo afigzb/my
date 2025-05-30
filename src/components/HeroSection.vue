@@ -53,7 +53,7 @@
         </div>
         
         <!-- 技能标签云 -->
-        <div class="mb-14 animate-fade-in-up" style="animation-delay: 1s;">
+        <div class="mb-12 animate-fade-in-up" style="animation-delay: 1s;">
           <div class="flex flex-wrap justify-center gap-3">
             <drag-follow 
               v-for="skill in skills" 
