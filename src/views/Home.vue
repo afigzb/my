@@ -132,10 +132,10 @@ const featuredWorks = computed(() => worksData.slice(0, 4))
 
 // 音乐播放列表配置
 const musicPlaylist = [
-  { id: 'track1', title: 'July - Rhapsody', src: 'July - Rhapsody.mp3' },
-  { id: 'track2', title: 'iwamizu - Love at First Sight', src: 'iwamizu - Love at First Sight.mp3' },
-  { id: 'track3', title: 'yutaka hirasaka - eternal moment', src: 'yutaka hirasaka - eternal moment.mp3' },
-  { id: 'track4', title: 'Saiakoup - Afterglow', src: 'Saiakoup - Afterglow.mp3' }
+  { id: 'track1', title: 'July - Rhapsody', filename: 'July - Rhapsody.mp3' },
+  { id: 'track2', title: 'iwamizu - Love at First Sight', filename: 'iwamizu - Love at First Sight.mp3' },
+  { id: 'track3', title: 'yutaka hirasaka - eternal moment', filename: 'yutaka hirasaka - eternal moment.mp3' },
+  { id: 'track4', title: 'Saiakoup - Afterglow', filename: 'Saiakoup - Afterglow.mp3' }
 ]
 
 // 平滑滚动到指定区域
