@@ -91,7 +91,7 @@
     <draggable-container initial-x-percent="90" initial-y-percent="85">
       <audio-player
         :playlist="musicPlaylist"
-        audio-base-path="../../public/demos/components/AudioPlayer/audio/"
+        audio-base-path="/demos/components/AudioPlayer/audio/"
         initial-volume="40"
         auto-play="false"
         initial-play-mode="LIST_LOOP"
@@ -146,9 +146,9 @@ const scrollToSection = (sectionClass) => {
 
 // Web Components 动态加载配置
 const webComponents = [
-  { name: 'sliding-damping', path: '../../public/demos/components/SlidingDamping/SlidingDamping.js' },
-  { name: 'draggable-container', path: '../../public/demos/components/DragDropContainer/DragDropContainer.js' },
-  { name: 'audio-player', path: '../../public/demos/components/AudioPlayer/src/AudioPlayer.js' }
+  { name: 'sliding-damping', path: '/demos/components/SlidingDamping/SlidingDamping.js' },
+  { name: 'draggable-container', path: '/demos/components/DragDropContainer/DragDropContainer.js' },
+  { name: 'audio-player', path: '/demos/components/AudioPlayer/src/AudioPlayer.js' }
 ]
 
 // 动态加载 Web Components
@@ -156,7 +156,16 @@ const loadWebComponents = async () => {
   for (const component of webComponents) {
     if (!customElements.get(component.name)) {
       try {
-        await import(component.path)
+        const script = document.createElement('script')
+        script.type = 'module'
+        script.src = component.path
+        document.head.appendChild(script)
+        
+        // 等待组件加载完成
+        await new Promise((resolve) => {
+          script.onload = resolve
+          script.onerror = resolve
+        })
       } catch (error) {
         console.warn(`Failed to load component: ${component.name}`, error)
       }
