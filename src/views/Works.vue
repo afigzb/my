@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white">
+  <div class="min-h-screen pt-16 bg-white">
     <!-- 页面标题 -->
     <section class="py-20">
       <div class="mx-auto px-6 text-center">
