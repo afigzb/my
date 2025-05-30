@@ -11,32 +11,49 @@
     </div>
 
     <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-      <div class="text-center max-w-4xl mx-auto">
-        <!-- 问候语 -->
-        <div class="mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
-          <h2 class="text-2xl font-light text-gray-600 mb-2">你好，我是</h2>
-          <div class="title-divider"></div>
+      <div class="text-center mx-auto">
+        <!-- 欢迎文字动画 -->
+        <div class="animate-fade-in-up relative mb-8" style="animation-delay: 0.2s;">
+          <svg class="welcome-text-svg mx-auto" viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#84cc16;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#22c55e;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            
+            <!-- 描边文字 (底层) -->
+            <text x="400" y="40" class="welcome-text-stroke" text-anchor="middle" dominant-baseline="middle">
+              Welcome to My Digital World
+            </text>
+            
+            <!-- 填充文字 (上层，使用CSS动画) -->
+            <text x="400" y="40" class="welcome-text-fill" text-anchor="middle" dominant-baseline="middle">
+              Welcome to My Digital World
+            </text>
+          </svg>
+          
+          <!-- 装饰性粒子效果 -->
+          <div class="particles-container">
+            <div class="particle" v-for="i in 8" :key="i" :style="getParticleStyle(i)"></div>
+          </div>
         </div>
 
-        <!-- 主标题 -->
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up text-gray-800" style="animation-delay: 0.4s;">
-          [姓名]
-        </h1>
-
         <!-- 副标题 -->
-        <p class="text-xl md:text-2xl mb-8 text-gray-600 max-w-2xl mx-auto animate-fade-in-up font-light" style="animation-delay: 0.6s;">
+        <p class="text-xl md:text-2xl mb-6 text-gray-600 max-w-2xl mx-auto animate-fade-in-up font-light" style="animation-delay: 0.6s;">
           前端开发工程师
         </p>
 
         <!-- 描述文字 -->
-        <div class="mb-12 animate-fade-in-up" style="animation-delay: 0.8s;">
+        <div class="mb-10 animate-fade-in-up" style="animation-delay: 0.8s;">
           <p class="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
-            专注于创建优秀的用户体验，将设计理念转化为高质量的代码实现
+            专注于创建优秀的用户体验，探索前端技术的无限可能
           </p>
         </div>
         
         <!-- 技能标签云 -->
-        <div class="mb-12 animate-fade-in-up" style="animation-delay: 1s;">
+        <div class="mb-14 animate-fade-in-up" style="animation-delay: 1s;">
           <div class="flex flex-wrap justify-center gap-3">
             <drag-follow 
               v-for="skill in skills" 
@@ -56,7 +73,7 @@
         </div>
 
         <!-- CTA 按钮 - 添加回弹效果 -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 1.2s;">
+        <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style="animation-delay: 1.2s;">
           <!-- 主要按钮 - 双层回弹 -->
           <drag-follow 
             max-offset="20" 
@@ -144,7 +161,29 @@ defineEmits(['scroll-to-works', 'scroll-to-skills'])
 const heroSection = ref(null)
 
 // 技能列表
-const skills = ['Vue.js', 'React', 'TypeScript', 'Node.js', 'Python']
+const skills = ['Vue.js', 'JavaScript', '‌Ant Design', 'webComponent', 'C#']
+
+// 计算粒子样式
+const getParticleStyle = (index) => {
+  const positions = [
+    { left: '10%', top: '20%' },
+    { left: '85%', top: '30%' },
+    { left: '15%', top: '70%' },
+    { left: '90%', top: '65%' },
+    { left: '25%', top: '15%' },
+    { left: '75%', top: '80%' },
+    { left: '5%', top: '50%' },
+    { left: '95%', top: '40%' }
+  ]
+  
+  const position = positions[index - 1] || { left: '50%', top: '50%' }
+  
+  return {
+    left: position.left,
+    top: position.top,
+    animationDelay: `${index * 0.5}s`
+  }
+}
 
 // 动态加载 drag-follow 组件
 const loadDragFollowComponent = async () => {
@@ -202,29 +241,89 @@ onMounted(() => {
   animation: float 6s ease-in-out infinite 3s;
 }
 
-/* 响应式调整连接元素位置 */
-@media (max-width: 1024px) {
-  .connection-elements {
-    left: 8%;
+/* 欢迎文字SVG动画样式 */
+.welcome-text-svg {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.welcome-text-stroke {
+  font-family: 'Arial', sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  fill: none;
+  stroke: url(#textGradient);
+  stroke-width: 2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawText 2.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards, strokeGlow 2s ease-in-out 4.5s infinite alternate;
+}
+
+.welcome-text-fill {
+  font-family: 'Arial', sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  fill: url(#textGradient);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+  animation: fillFromLeft 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.5s forwards;
+}
+
+@keyframes drawText {
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
-@media (max-width: 768px) {
-  .connection-elements {
-    left: 5%;
+@keyframes strokeGlow {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(132, 204, 22, 0.3));
   }
-  
-  .connection-dot {
-    display: none;
+  100% {
+    filter: drop-shadow(0 0 20px rgba(132, 204, 22, 0.6)) drop-shadow(0 0 30px rgba(34, 197, 94, 0.4));
   }
 }
 
-/* 响应式调整 */
-@media (max-width: 768px) {
-  .min-h-screen {
-    min-height: 100vh;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+@keyframes fillFromLeft {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+/* 粒子效果样式 */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #84cc16, #22c55e);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(132, 204, 22, 0.5);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 1;
   }
 }
 </style> 

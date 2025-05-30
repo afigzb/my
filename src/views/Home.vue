@@ -40,7 +40,7 @@
           </div>
           
           <!-- 作品网格 - 轻量级组件，可以直接加载 -->
-          <div class="grid grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <WorkCard 
               v-for="work in featuredWorks" 
               :key="work.id" 
@@ -127,8 +127,8 @@ const skillsRef = ref(null)
 const worksRef = ref(null)
 const aboutRef = ref(null)
 
-// 获取精选作品（显示4张卡片）
-const featuredWorks = computed(() => worksData.slice(0, 4))
+// 获取精选作品（显示6张卡片）
+const featuredWorks = computed(() => worksData.slice(0, 6))
 
 // 音乐播放列表配置
 const musicPlaylist = [

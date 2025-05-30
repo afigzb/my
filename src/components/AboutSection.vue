@@ -13,7 +13,7 @@
         </div>
 
         <!-- 主内容区域 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <!-- 左侧内容 -->
           <div>
             <!-- 核心价值卡片 -->
@@ -21,8 +21,8 @@
               <div v-for="value in coreValues" :key="value.title" 
                 class="card-base card-hover">
                 <div class="flex items-center mb-4">
-                  <div class="w-10 h-10 bg-lime-100 rounded-full flex items-center justify-center mr-4">
-                    <component :is="'svg'" class="w-5 h-5 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div class="w-10 h-10 bg-lime-50 rounded-full flex items-center justify-center mr-4 border border-lime-100">
+                    <component :is="'svg'" class="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="value.iconPath" />
                     </component>
                   </div>
@@ -47,12 +47,12 @@
 
           <!-- 右侧装饰区域 -->
           <div class="relative">
-            <!-- 主要装饰卡片 -->
-            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-100">
-              <div class="text-center">
+            <!-- 主要装饰卡片 - 只匹配核心价值卡片的高度 -->
+            <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-100" style="height: 380px;">
+              <div class="text-center h-full flex flex-col justify-center">
                 <!-- 头像占位 -->
-                <div class="w-32 h-32 bg-gradient-to-br from-lime-100 to-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg class="w-16 h-16 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-28 h-28 bg-gradient-to-br from-lime-50 to-cyan-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-lime-100">
+                  <svg class="w-14 h-14 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
@@ -61,13 +61,13 @@
                 <div class="space-y-3">
                   <div class="flex flex-wrap justify-center gap-2">
                     <span v-for="skill in skillTags.frontend" :key="skill" 
-                      class="px-3 py-1 bg-lime-100 text-lime-700 text-xs rounded-full">
+                      class="px-3 py-1 bg-lime-50 text-lime-600 text-xs rounded-full border border-lime-100">
                       {{ skill }}
                     </span>
                   </div>
                   <div class="flex flex-wrap justify-center gap-2">
                     <span v-for="skill in skillTags.backend" :key="skill"
-                      class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                      class="px-3 py-1 bg-cyan-50 text-cyan-600 text-xs rounded-full border border-cyan-100">
                       {{ skill }}
                     </span>
                   </div>
@@ -75,13 +75,13 @@
               </div>
             </div>
             
-            <!-- 装饰元素 -->
-            <div class="absolute -top-4 -right-4 w-16 h-16 bg-lime-200/30 rounded-full"></div>
-            <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-green-200/30 rounded-full"></div>
+            <!-- 装饰元素 - 恢复柔和颜色 -->
+            <div class="absolute -top-4 -right-4 w-16 h-16 bg-lime-50/50 rounded-full border border-lime-100/30"></div>
+            <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-cyan-50/50 rounded-full border border-cyan-100/30"></div>
             
             <!-- 浮动标签 -->
             <div v-for="(label, index) in floatingLabels" :key="label.text"
-              class="absolute bg-white/80 backdrop-blur-sm px-3 py-2 rounded-lg text-sm font-medium text-gray-700 border border-gray-100"
+              class="absolute bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg text-sm font-medium text-gray-600 border border-gray-100 shadow-sm"
               :class="label.position">
               {{ label.text }}
             </div>
@@ -144,8 +144,8 @@ const personalLinks = [
 
 // 技能标签
 const skillTags = {
-  frontend: ['Vue.js', 'React', 'TypeScript'],
-  backend: ['Node.js', 'Python', '设计思维']
+  frontend: ['Vue.js', 'JavaScript', '‌Ant Design'],
+  backend: ['webComponent', 'C#', '设计思维']
 }
 
 // 浮动标签

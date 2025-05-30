@@ -92,9 +92,11 @@ const resetTransform = () => {
   text-decoration: none;
   transition: all 0.3s ease;
   overflow: hidden;
-  background: white;
+  background: white/60;
+  backdrop-filter: blur(4px);
+  border-radius: 1rem;
+  border: 1px solid rgb(229, 231, 235);
 }
-
 
 .image-container {
   height: 320px;
@@ -105,7 +107,8 @@ const resetTransform = () => {
   overflow: hidden;
   transition: transform 0.2s ease-out;
   transform-style: preserve-3d;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+  border-radius: 1rem;
 }
 
 .image-overlay {
@@ -114,7 +117,7 @@ const resetTransform = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -122,14 +125,14 @@ const resetTransform = () => {
 }
 
 .content {
-  padding: 4px;
-  background: white;
+  padding: 20px;
+  background: transparent;
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #374151;
   margin-bottom: 12px;
   line-height: 1.4;
 }
@@ -138,7 +141,7 @@ const resetTransform = () => {
   color: #6b7280;
   line-height: 1.6;
   margin-bottom: 20px;
-  font-size: 1.1rem;
+  font-size: 0.875rem;
   height: 3.2em; /* 固定高度为两行文本 */
   overflow: hidden;
   display: -webkit-box;
@@ -154,18 +157,18 @@ const resetTransform = () => {
 }
 
 .tag {
-  background: #f9fafb;
-  color: #374151;
-  padding: 6px 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 0;
-  font-size: 0.9rem;
+  background: #f0fdf4;
+  color: #16a34a;
+  padding: 4px 12px;
+  border: 1px solid #bbf7d0;
+  border-radius: 9999px;
+  font-size: 0.75rem;
   font-weight: 500;
 }
 
 .tag:first-child {
-  background: #16a34a;
-  color: white;
-  border-color: #16a34a;
+  background: #ecfdf5;
+  color: #059669;
+  border-color: #a7f3d0;
 }
 </style> 

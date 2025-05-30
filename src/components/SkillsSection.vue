@@ -5,44 +5,58 @@
       <!-- 第一个水平滚动容器 - 正向滚动 -->
       <div 
         ref="scrollContainer1"
-        class="skills-scroll-container overflow-x-auto overflow-y-hidden mb-12"
+        class="skills-scroll-container overflow-x-auto mb-16"
       >
-        <div class="skills-wrapper flex gap-8 pb-4">
-          <div 
+        <div class="skills-wrapper flex gap-12 pb-6">
+          <drag-follow
             v-for="skill in skills" 
             :key="skill.name + '-1'"
-            class="skill-card flex-shrink-0 p-4 w-64 text-center"
+            max-offset="15" 
+            follow-speed="0.01" 
+            spring-constant="0.75" 
+            damping-factor="0.35" 
+            max-bounce-times="6" 
+            bounce-threshold="0.2"
           >
-            <!-- 大标题 -->
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">{{ skill.name }}</h2>
-            
-            <!-- 描述标签 -->
-            <span class="inline-block px-4 py-2 bg-lime-300 text-xs font-semibold text-gray-800 rounded-full">
-              {{ skill.description }}
-            </span>
-          </div>
+            <div class="my-4 skill-card flex-shrink-0 p-8 w-80 text-center bg-white/40 backdrop-blur-sm rounded-2xl border border-gray-100">
+              <!-- 大标题 -->
+              <h2 class="text-3xl font-light text-gray-700 mb-6">{{ skill.name }}</h2>
+              
+              <!-- 描述标签 -->
+              <span class="inline-block px-8 py-3 bg-lime-50 text-lime-600 text-xs font-medium rounded-full border border-lime-100">
+                {{ skill.description }}
+              </span>
+            </div>
+          </drag-follow>
         </div>
       </div>
 
       <!-- 第二个水平滚动容器 - 反向滚动 -->
       <div 
         ref="scrollContainer2"
-        class="skills-scroll-container overflow-x-auto overflow-y-hidden"
+        class="skills-scroll-container overflow-x-auto mb-16"
       >
-        <div class="skills-wrapper flex gap-8 pb-4">
-          <div 
+        <div class="skills-wrapper flex gap-12 pb-6 h-full">
+          <drag-follow
             v-for="skill in skills" 
             :key="skill.name + '-2'"
-            class="skill-card flex-shrink-0 p-4 w-64 text-center"
+            max-offset="15" 
+            follow-speed="0.01" 
+            spring-constant="0.75" 
+            damping-factor="0.35" 
+            max-bounce-times="6" 
+            bounce-threshold="0.2"
           >
-            <!-- 大标题 -->
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">{{ skill.name }}</h2>
-            
-            <!-- 描述标签 -->
-            <span class="inline-block px-4 py-2 bg-lime-300 text-gray-800 font-semibold text-xs rounded-full">
-              {{ skill.description }}
-            </span>
-          </div>
+            <div class="my-4 skill-card flex-shrink-0 p-8 w-80 text-center bg-white/40 backdrop-blur-sm rounded-2xl border border-gray-100">
+              <!-- 大标题 -->
+              <h2 class="text-3xl font-light text-gray-700 mb-6">{{ skill.name }}</h2>
+              
+              <!-- 描述标签 -->
+              <span class="inline-block px-8 py-3 bg-cyan-50 text-cyan-600 font-medium text-xs rounded-full border border-cyan-100">
+                {{ skill.description }}
+              </span>
+            </div>
+          </drag-follow>
         </div>
       </div>
     </div>
@@ -64,8 +78,8 @@
         <div class="grid md:grid-cols-3 gap-8">
           <div v-for="concept in designConcepts" :key="concept.title"
             class="card-base card-hover">
-            <div class="w-12 h-12 bg-lime-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-6 h-6 text-lime-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-12 h-12 bg-lime-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-lime-100">
+              <svg class="w-6 h-6 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="concept.iconPath" />
               </svg>
             </div>
@@ -142,11 +156,27 @@ const handleGlobalWheel = (event) => {
   }
 }
 
+// 动态加载 drag-follow 组件
+const loadDragFollowComponent = async () => {
+  if (!customElements.get('drag-follow')) {
+    try {
+      const script = document.createElement('script')
+      script.type = 'module'
+      script.src = '/demos/components/FocusDiv/FocusDiv.js'
+      document.head.appendChild(script)
+    } catch (error) {
+      console.warn('Failed to load drag-follow component:', error)
+    }
+  }
+}
+
 // 使用动画管理
 usePageAnimations()
 
 // 组件挂载后的处理
 onMounted(() => {
+  loadDragFollowComponent()
+  
   // 添加全局滚轮事件监听
   window.addEventListener('wheel', handleGlobalWheel, { passive: false })
   
@@ -178,11 +208,18 @@ onUnmounted(() => {
 
 /* 技能卡片样式 */
 .skill-card {
-  min-width: 256px;
+  min-width: 320px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* 技能包装器 */
 .skills-wrapper {
   width: max-content;
+  padding: 0 2rem;
 }
 </style> 
