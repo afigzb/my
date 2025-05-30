@@ -142,9 +142,14 @@ const musicPlaylist = [
 const scrollToSection = (sectionClass) => {
   const element = document.querySelector(sectionClass)
   if (element) {
-    element.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
+    // 获取元素相对于页面顶部的位置
+    const elementRect = element.getBoundingClientRect()
+    const absoluteElementTop = elementRect.top + window.pageYOffset
+    
+    // 滚动到指定位置
+    window.scrollTo({
+      top: absoluteElementTop - 80, // 减去导航栏高度
+      behavior: 'smooth'
     })
   }
 }
