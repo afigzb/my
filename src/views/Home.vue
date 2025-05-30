@@ -87,18 +87,16 @@
       </div>
     </sliding-damping>
 
-    <!-- 可拖拽的音乐播放器 - 延迟加载 -->
-    <template v-if="isPlayerReady">
-      <draggable-container initial-x-percent="90" initial-y-percent="55">
-        <audio-player
-          :playlist="musicPlaylist"
-          audio-base-path="../../public/demos/components/AudioPlayer/audio/"
-          initial-volume="40"
-          auto-play="false"
-          initial-play-mode="LIST_LOOP"
-        ></audio-player>
-      </draggable-container>
-    </template>
+    <!-- 可拖拽的音乐播放器 - 直接加载 -->
+    <draggable-container initial-x-percent="90" initial-y-percent="85">
+      <audio-player
+        :playlist="musicPlaylist"
+        audio-base-path="../../public/demos/components/AudioPlayer/audio/"
+        initial-volume="40"
+        auto-play="false"
+        initial-play-mode="LIST_LOOP"
+      ></audio-player>
+    </draggable-container>
   </div>
 </template>
 
@@ -123,7 +121,6 @@ const AboutSection = defineAsyncComponent(() =>
 const isSkillsVisible = ref(false)
 const isWorksVisible = ref(false)
 const isAboutVisible = ref(false)
-const isPlayerReady = ref(false)
 
 // 获取精选作品（显示4张卡片）
 const featuredWorks = computed(() => worksData.slice(0, 4))
@@ -214,11 +211,6 @@ onMounted(async () => {
   
   // 初始化分步加载
   initProgressiveLoading()
-  
-  // 延迟加载音乐播放器
-  setTimeout(() => {
-    isPlayerReady.value = true
-  }, 3000)
 })
 </script>
 
