@@ -51,7 +51,7 @@ class DragFollow extends LitElement {
         this.followSpeed = 0.05;          // 跟随速度
         this.springConstant = 0.8;        // 弹簧系数，控制回弹速度
         this.dampingFactor = 0.3;         // 阻尼系数，控制衰减速度
-        this.maxBounceTimes = 3;          // 最大回弹次数
+        this.maxBounceTimes = 6;          // 最大回弹次数
         this.bounceThreshold = 0.5;       // 回弹停止阈值
         this.MIN_MOVEMENT_THRESHOLD = 0.05; // 最小移动阈值，防止微小抖动
         this.mouseMoveThrottleTime = 16;  // 鼠标移动节流时间（约60fps）
