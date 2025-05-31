@@ -87,7 +87,6 @@
     <div v-if="shouldLoadAudioPlayer">
       <draggable-container initial-x-percent="90" initial-y-percent="85">
         <audio-player
-          :playlist="musicPlaylist"
           audio-base-path="/demos/components/AudioPlayer/audio/"
           initial-volume="40"
           auto-play="false"
@@ -126,14 +125,6 @@ const aboutRef = ref(null)
 
 // 获取精选作品（显示6张卡片）
 const featuredWorks = computed(() => worksData.slice(0, 6))
-
-// 音乐播放列表配置
-const musicPlaylist = [
-  { id: 'track1', title: 'July - Rhapsody', filename: 'July - Rhapsody.mp3' },
-  { id: 'track2', title: 'iwamizu - Love at First Sight', filename: 'iwamizu - Love at First Sight.mp3' },
-  { id: 'track3', title: 'yutaka hirasaka - eternal moment', filename: 'yutaka hirasaka - eternal moment.mp3' },
-  { id: 'track4', title: 'Saiakoup - Afterglow', filename: 'Saiakoup - Afterglow.mp3' }
-]
 
 // 智能懒加载策略
 const setupIntersectionObserver = () => {

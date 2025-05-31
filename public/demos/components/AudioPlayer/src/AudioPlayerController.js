@@ -4,15 +4,15 @@
 export const AUDIO_CONFIG = {
     // 默认播放列表（当外部没有提供时使用）
     DEFAULT_FILES: [
-        'July - Rhapsody.mp3',
         'yutaka hirasaka - eternal moment.mp3',
+        'のぶなが,ゆうゆ - 深海少女.mp3',
         'iwamizu - Love at First Sight.mp3',
         '能登麻美子 - 夕顔.mp3',
         'July - 그 여름의 바다.mp3',
         'Lucid fall - 구름으로 가자 (Inst.).mp3',
         'Lulleaux,Giang Pham - Contact.mp3',
         'Saiakoup - Afterglow.mp3',
-        'のぶなが,ゆうゆ - 深海少女.mp3',
+        'July - Rhapsody.mp3',
     ],
     MODES: {
         LIST_LOOP: 'LIST_LOOP',
