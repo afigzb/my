@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page-Flip 翻页效果演示</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        #book {
+            margin: 20px auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        
+        .page {
+            background: white;
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .page p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 16px;
+            max-width: 300px;
+        }
+        
+        .page.cover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .page.cover h2 {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .page.back-cover {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .page.back-cover h2 {
+            color: white;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ul {
+            text-align: left;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Page-Flip 翻页效果演示</h1>
+        
+        <div id="book">
+            <div class="page cover">
+                <h2>我的翻页书</h2>
+                <p>使用 page-flip 库制作</p>
+                <p>支持触摸和鼠标拖拽操作</p>
+            </div>
+            
+            <div class="page">
+                <h2>第一章</h2>
+                <p>欢迎来到翻页书的世界！这是一个使用现代JavaScript技术制作的交互式书籍演示。</p>
+                <p>你可以通过鼠标拖拽页面角落来翻页。</p>
+                <div class="page-number">1</div>
+            </div>
+            
+            <div class="page">
+                <h2>功能特性</h2>
+                <p>✓ 流畅的翻页动画</p>
+                <p>✓ 响应式设计</p>
+                <p>✓ 移动设备支持</p>
+                <p>✓ 无依赖库</p>
+                <div class="page-number">2</div>
+            </div>
+            
+            <div class="page">
+                <h2>交互方式</h2>
+                <p>• 拖拽页面角落翻页</p>
+                <p>• 点击页面边缘翻页</p>
+                <p>• 触摸操作（移动设备）</p>
+                <div class="page-number">3</div>
+            </div>
+            
+            <div class="page">
+                <h2>简洁体验</h2>
+                <p>专注于最核心的翻页体验，没有多余的控制按钮。</p>
+                <p>直观的拖拽操作，就像真实的书本一样。</p>
+                <div class="page-number">4</div>
+            </div>
+            
+            <div class="page">
+                <h2>响应式支持</h2>
+                <p>页面会自动适应不同的屏幕尺寸，在手机和平板上也能完美显示。</p>
+                <p>支持横屏和竖屏模式切换。</p>
+                <div class="page-number">5</div>
+            </div>
+            
+            <div class="page">
+                <h2>自定义内容</h2>
+                <p>你可以在页面中添加任何HTML内容：图片、表格、表单等。</p>
+                <p>页面布局完全可自定义。</p>
+                <div class="page-number">6</div>
+            </div>
+            
+            <div class="page back-cover">
+                <h2>谢谢阅读</h2>
+                <p>这就是 page-flip 库的简洁演示</p>
+                <p>享受纯粹的翻页体验！</p>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>使用说明</h3>
+            <ul>
+                <li>拖拽页面右上角或右下角向左翻到下一页</li>
+                <li>拖拽页面左上角或左下角向右翻到上一页</li>
+                <li>点击页面右边缘快速翻到下一页</li>
+                <li>点击页面左边缘快速翻到上一页</li>
+                <li>在移动设备上支持触摸拖拽操作</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 引入 page-flip 库 -->
+    <script src="https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
+    <script>
+        // 等待页面加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建翻页书实例
+            const pageFlip = new St.PageFlip(document.getElementById('book'), {
+                width: 400,      // 单页宽度
+                height: 600,     // 页面高度
+                size: "fixed",   // 固定尺寸
+                
+                // 动画设置
+                flippingTime: 1000,        // 翻页动画时间（毫秒）
+                
+                // 外观设置
+                drawShadow: true,          // 绘制阴影
+                maxShadowOpacity: 0.5,     // 最大阴影透明度
+                
+                // 响应式设置
+                usePortrait: true,         // 启用竖屏模式
+                autoSize: true,            // 自动调整尺寸
+                
+                // 其他设置
+                showCover: false,          // 不显示特殊封面模式
+                mobileScrollSupport: true  // 移动端滚动支持
+            });
+
+            // 从HTML元素加载页面
+            pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+            // 页面加载完成后的提示
+            setTimeout(function() {
+                console.log('翻页书已加载完成！');
+                console.log('拖拽页面角落或点击页面边缘来翻页');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
