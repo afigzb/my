@@ -59,7 +59,7 @@
           <h2 class="text-3xl font-bold text-gray-800 mb-4">技术栈</h2>
           <div class="w-16 h-1 bg-gradient-to-r from-lime-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
           <p class="text-gray-600 max-w-2xl mx-auto">
-            这些是我在实际项目中使用过并且有深入了解的技术栈
+            这些是我在实际项目中又说运用的技术栈
           </p>
         </div>
 
