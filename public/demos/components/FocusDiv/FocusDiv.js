@@ -1,4 +1,4 @@
-import { LitElement, html, css } from '/vendor/lit-core.min.js';
+import { LitElement, html, css } from '../../../vendor/lit-core.min.js';
 
 /**
  * DragFollow 组件
@@ -8,14 +8,14 @@ import { LitElement, html, css } from '/vendor/lit-core.min.js';
 class DragFollow extends LitElement {
     // 组件属性定义
     static properties = {
-        maxOffset: { type: Number },      // 最大偏移距离
-        followSpeed: { type: Number },    // 跟随速度
-        xCoefficient: { type: Number },   // X轴系数
-        yCoefficient: { type: Number },   // Y轴系数
-        springConstant: { type: Number }, // 弹簧系数k
-        dampingFactor: { type: Number },  // 阻尼系数b
-        maxBounceTimes: { type: Number }, // 最大回弹次数
-        bounceThreshold: { type: Number } // 回弹停止阈值
+        maxOffset: { type: Number, attribute: 'max-offset' },      // 最大偏移距离
+        followSpeed: { type: Number, attribute: 'follow-speed' },    // 跟随速度
+        xCoefficient: { type: Number, attribute: 'x-coefficient' },   // X轴系数
+        yCoefficient: { type: Number, attribute: 'y-coefficient' },   // Y轴系数
+        springConstant: { type: Number, attribute: 'spring-constant' }, // 弹簧系数k
+        dampingFactor: { type: Number, attribute: 'damping-factor' },  // 阻尼系数b
+        maxBounceTimes: { type: Number, attribute: 'max-bounce-times' }, // 最大回弹次数
+        bounceThreshold: { type: Number, attribute: 'bounce-threshold' } // 回弹停止阈值
     };
 
     // 组件样式定义
