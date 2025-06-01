@@ -9,25 +9,25 @@
     ></canvas>
 
     <!-- 页面标题区域 -->
-    <section class="section-base pb-16 text-center overflow-hidden">
+    <section class="section-base pb-12 sm:pb-16 text-center overflow-hidden">
       <!-- 背景装饰 -->
       <BackgroundDecorator variant="skills" />
       
-      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-8">
         <!-- 标题动画 -->
-        <div class="animate-fade-in-up pt-16 mb-8">
-          <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+        <div class="animate-fade-in-up pt-12 sm:pt-16 mb-6 sm:mb-8">
+          <h1 class="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6 text-gray-800">
             技术能力
           </h1>
-          <div class="w-16 h-1 bg-gradient-to-r from-lime-500 to-emerald-500 mx-auto rounded-full mb-8"></div>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto font-light">
+          <div class="w-16 h-1 bg-gradient-to-r from-lime-500 to-emerald-500 mx-auto rounded-full mb-6 sm:mb-8"></div>
+          <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto font-light">
             持续学习和掌握现代前端技术，致力于创建高质量的用户体验
           </p>
         </div>
 
         <!-- 技能标签云 -->
-        <div class="mb-16 animate-fade-in-up" style="animation-delay: 0.4s;">
-          <div class="flex flex-wrap justify-center gap-x-4 gap-y-3 max-w-5xl mx-auto leading-relaxed">
+        <div class="mb-12 sm:mb-16 animate-fade-in-up" style="animation-delay: 0.4s;">
+          <div class="flex flex-wrap justify-center gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-3 max-w-5xl mx-auto leading-relaxed">
             <drag-follow 
               v-for="(tag, index) in skillTags" 
               :key="tag"
@@ -39,7 +39,7 @@
               bounce-threshold="0.2"
             >
               <span 
-                class="skill-cloud-tag px-4 py-2 bg-white/70 backdrop-blur-md text-gray-700 text-sm font-medium cursor-pointer rounded-full hover:bg-white/90 border border-gray-200/30 transition-all duration-300 hover:scale-105 shadow-sm"
+                class="skill-cloud-tag px-3 py-1.5 sm:px-4 sm:py-2 bg-white/70 backdrop-blur-md text-gray-700 text-sm font-medium cursor-pointer rounded-full hover:bg-white/90 border border-gray-200/30 transition-all duration-300 hover:scale-105 shadow-sm"
                 :style="{ 
                   animationDelay: `${index * 280}ms`
                 }"
@@ -54,7 +54,7 @@
 
     <!-- 技术栈时间轴 -->
     <section class="section-base py-16 bg-gradient-to-b from-gray-50 to-white">
-      <div class="max-w-6xl mx-auto px-8">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8">
         <div class="text-center mb-16">
           <h2 class="text-3xl font-bold text-gray-800 mb-4">技术栈</h2>
           <div class="w-16 h-1 bg-gradient-to-r from-lime-500 to-emerald-500 mx-auto rounded-full mb-6"></div>
@@ -65,11 +65,11 @@
 
         <!-- 时间轴容器 -->
         <div class="relative">
-          <!-- 中心线 -->
-          <div class="absolute left-1/2 transform -translate-x-px w-0.5 h-full bg-gray-300"></div>
+          <!-- 中心线 - 移动端在左侧，桌面端居中 -->
+          <div class="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-px w-0.5 h-full bg-gray-300"></div>
           
           <!-- 技术项目 -->
-          <div class="space-y-16">
+          <div class="space-y-12 sm:space-y-16">
             <div 
               v-for="(skill, index) in techStack"
               :key="skill.name"
@@ -79,75 +79,145 @@
             >
               <!-- 时间轴节点 -->
               <div 
-                class="timeline-dot absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-8 w-4 h-4 bg-lime-500 rounded-full border-4 border-white shadow-lg z-20"
+                class="timeline-dot absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 -translate-y-1/2 top-8 w-4 h-4 bg-lime-500 rounded-full border-4 border-white shadow-lg z-20"
                 :style="{ animationDelay: `${index * 200}ms` }"
               ></div>
               
-              <!-- 内容容器 -->
-              <div class="flex items-start" :class="index % 2 === 0 ? 'justify-start translate-x-[2%]' : 'justify-end -translate-x-[2%]'">
-                <drag-follow
-                  max-offset="35"
-                  follow-speed="0.02"
-                  spring-constant="0.75"
-                  damping-factor="0.35"
-                  maxBounce-times="10"
-                  bounce-threshold="0.2"
-                >
-                  <!-- 内容卡片 -->
-                  <div 
-                    class="timeline-card w-[480px] bg-white border border-gray-200 p-8 shadow-lg rounded-xl"
-                    :style="{ animationDelay: `${index * 200 + 100}ms` }"
+              <!-- 内容容器 - 移动端统一右侧，桌面端交替 -->
+              <div class="flex items-start">
+                <!-- 移动端：左边距离时间轴，统一布局 -->
+                <div class="ml-12 sm:ml-0 sm:hidden w-full">
+                  <drag-follow
+                    max-offset="35"
+                    follow-speed="0.02"
+                    spring-constant="0.75"
+                    damping-factor="0.35"
+                    maxBounce-times="10"
+                    bounce-threshold="0.2"
                   >
-                    <!-- 技术头部 -->
-                    <div class="flex items-center mb-6">
-                      <div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center mr-5">
-                        <span class="text-gray-700 font-bold text-xl">{{ skill.icon }}</span>
+                    <!-- 移动端卡片 -->
+                    <div 
+                      class="timeline-card w-full max-w-xs bg-white border border-gray-200 p-6 shadow-lg rounded-xl"
+                      :style="{ animationDelay: `${index * 200 + 100}ms` }"
+                    >
+                      <!-- 技术头部 -->
+                      <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mr-4">
+                          <span class="text-gray-700 font-bold text-lg">{{ skill.icon }}</span>
+                        </div>
+                        <div class="flex-1">
+                          <h3 class="text-lg font-bold text-gray-800 mb-1">{{ skill.name }}</h3>
+                          <span class="text-xs text-gray-500 font-medium">{{ skill.category }}</span>
+                        </div>
                       </div>
-                      <div class="flex-1">
-                        <h3 class="text-xl font-bold text-gray-800 mb-1">{{ skill.name }}</h3>
-                        <span class="text-sm text-gray-500 font-medium">{{ skill.category }}</span>
+
+                      <!-- 技术描述 -->
+                      <div class="mb-4">
+                        <p class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl">
+                          {{ skill.description }}
+                        </p>
                       </div>
-                    </div>
 
-                    <!-- 技术描述 -->
-                    <div class="mb-6">
-                      <p class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-xl">
-                        {{ skill.description }}
-                      </p>
-                    </div>
+                      <!-- 项目经验 -->
+                      <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                          <span class="w-2 h-2 bg-lime-500 rounded-full mr-2"></span>
+                          项目经验
+                        </h4>
+                        <ul class="space-y-2">
+                          <li 
+                            v-for="(project, projectIndex) in skill.projects"
+                            :key="projectIndex"
+                            class="project-item text-sm text-gray-600 leading-relaxed flex items-start"
+                            :style="{ animationDelay: `${index * 200 + 200 + projectIndex * 100}ms` }"
+                          >
+                            <span class="w-2 h-2 bg-lime-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                            <span class="flex-1">{{ project }}</span>
+                          </li>
+                        </ul>
+                      </div>
 
-                    <!-- 项目经验 -->
-                    <div class="mb-6">
-                      <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center">
-                        <span class="w-2 h-2 bg-lime-500 rounded-full mr-2"></span>
-                        项目经验
-                      </h4>
-                      <ul class="space-y-3">
-                        <li 
-                          v-for="(project, projectIndex) in skill.projects"
-                          :key="projectIndex"
-                          class="project-item text-sm text-gray-600 leading-relaxed flex items-start"
-                          :style="{ animationDelay: `${index * 200 + 200 + projectIndex * 100}ms` }"
+                      <!-- 技术特色 -->
+                      <div class="flex flex-wrap gap-1.5">
+                        <span 
+                          v-for="(feature, featureIndex) in skill.technologies"
+                          :key="feature"
+                          class="skill-tag px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full border border-gray-200"
+                          :style="{ animationDelay: `${index * 200 + 300 + featureIndex * 100}ms` }"
                         >
-                          <span class="w-2 h-2 bg-lime-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <span class="flex-1">{{ project }}</span>
-                        </li>
-                      </ul>
+                          {{ feature }}
+                        </span>
+                      </div>
                     </div>
+                  </drag-follow>
+                </div>
 
-                    <!-- 技术特色 -->
-                    <div class="flex flex-wrap gap-2">
-                      <span 
-                        v-for="(feature, featureIndex) in skill.technologies"
-                        :key="feature"
-                        class="skill-tag px-3 py-1.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-full border border-gray-200"
-                        :style="{ animationDelay: `${index * 200 + 300 + featureIndex * 100}ms` }"
-                      >
-                        {{ feature }}
-                      </span>
+                <!-- 桌面端：恢复原始交替布局 -->
+                <div class="hidden sm:flex sm:items-start w-full" :class="index % 2 === 0 ? 'justify-start translate-x-[2%]' : 'justify-end -translate-x-[2%]'">
+                  <drag-follow
+                    max-offset="35"
+                    follow-speed="0.02"
+                    spring-constant="0.75"
+                    damping-factor="0.35"
+                    maxBounce-times="10"
+                    bounce-threshold="0.2"
+                  >
+                    <!-- 桌面端卡片 - 完全恢复原状 -->
+                    <div 
+                      class="timeline-card w-[480px] bg-white border border-gray-200 p-8 shadow-lg rounded-xl"
+                      :style="{ animationDelay: `${index * 200 + 100}ms` }"
+                    >
+                      <!-- 技术头部 -->
+                      <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center mr-5">
+                          <span class="text-gray-700 font-bold text-xl">{{ skill.icon }}</span>
+                        </div>
+                        <div class="flex-1">
+                          <h3 class="text-xl font-bold text-gray-800 mb-1">{{ skill.name }}</h3>
+                          <span class="text-sm text-gray-500 font-medium">{{ skill.category }}</span>
+                        </div>
+                      </div>
+
+                      <!-- 技术描述 -->
+                      <div class="mb-6">
+                        <p class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-xl">
+                          {{ skill.description }}
+                        </p>
+                      </div>
+
+                      <!-- 项目经验 -->
+                      <div class="mb-6">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-4 flex items-center">
+                          <span class="w-2 h-2 bg-lime-500 rounded-full mr-2"></span>
+                          项目经验
+                        </h4>
+                        <ul class="space-y-3">
+                          <li 
+                            v-for="(project, projectIndex) in skill.projects"
+                            :key="projectIndex"
+                            class="project-item text-sm text-gray-600 leading-relaxed flex items-start"
+                            :style="{ animationDelay: `${index * 200 + 200 + projectIndex * 100}ms` }"
+                          >
+                            <span class="w-2 h-2 bg-lime-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                            <span class="flex-1">{{ project }}</span>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- 技术特色 -->
+                      <div class="flex flex-wrap gap-2">
+                        <span 
+                          v-for="(feature, featureIndex) in skill.technologies"
+                          :key="feature"
+                          class="skill-tag px-3 py-1.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-full border border-gray-200"
+                          :style="{ animationDelay: `${index * 200 + 300 + featureIndex * 100}ms` }"
+                        >
+                          {{ feature }}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </drag-follow>
+                  </drag-follow>
+                </div>
               </div>
             </div>
           </div>
@@ -482,7 +552,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* 技能标签云样式 */
+/* 只保留Tailwind无法实现的复杂动画 */
 .skill-cloud-tag {
   opacity: 0;
   transform: translateY(20px) scale(0.95);
@@ -586,25 +656,6 @@ onUnmounted(() => {
   50% {
     box-shadow: 0 0 0 8px rgba(132, 204, 22, 0);
     transform: translateX(-50%) translateY(-50%) scale(1.05);
-  }
-}
-
-/* 减少动画偏好设置 */
-@media (prefers-reduced-motion: reduce) {
-  .skill-cloud-tag,
-  .timeline-item,
-  .timeline-dot,
-  .timeline-card,
-  .skill-tag,
-  .project-item {
-    animation: none !important;
-    transition: none !important;
-  }
-  
-  .skill-cloud-tag,
-  .timeline-item {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
   }
 }
 </style> 

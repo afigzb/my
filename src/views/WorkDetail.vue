@@ -2,7 +2,7 @@
   <div class="h-screen bg-white overflow-hidden" v-if="work">
     <!-- 简化的顶部导航 -->
     <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div class="mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto px-8">
         <div class="flex justify-between items-center h-14">
           <!-- 左侧导航 -->
           <div class="flex items-center space-x-6">

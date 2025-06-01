@@ -1,11 +1,11 @@
 <template>
   <router-link 
     :to="`/works/${work.id}`"
-    class="work-card  z-20"
+    class="block no-underline transition-all duration-300 ease-in-out overflow-hidden z-20"
   >
     <!-- 图片区域 -->
     <div 
-      class="image-container"
+      class="h-48 sm:h-64 lg:h-80 relative overflow-hidden transition-transform duration-200 ease-out rounded-t-2xl preserve-3d"
       @mousemove="handleMouseMove"
       @mouseleave="resetTransform"
       :style="backgroundStyle"
@@ -13,16 +13,16 @@
     </div>
 
     <!-- 内容区域 -->
-    <div class="content">
-      <h3 class="title">{{ work.title }}</h3>
-      <p class="description">{{ work.description }}</p>
+    <div class="p-4 sm:p-5">
+      <h3 class="text-base sm:text-lg font-semibold text-gray-700 mb-2">{{ work.title }}</h3>
+      <p class="text-gray-500 leading-relaxed mb-3 sm:mb-4 text-sm line-clamp-2">{{ work.description }}</p>
       
       <!-- 标签 -->
-      <div class="tags">
+      <div class="flex flex-wrap gap-1.5 sm:gap-2">
         <span 
           v-for="tag in work.tags" 
           :key="tag"
-          class="tag"
+          class="bg-green-50 text-emerald-600 px-2 py-1 sm:px-3 sm:py-1 rounded-lg text-xs font-medium"
         >
           {{ tag }}
         </span>
@@ -84,56 +84,15 @@ const resetTransform = () => {
 </script>
 
 <style scoped>
-.work-card {
-  display: block;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-.image-container {
-  height: 320px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease-out;
+/* 只保留Tailwind无法实现的样式 */
+.preserve-3d {
   transform-style: preserve-3d;
-  border-radius: 1rem 1rem 0 0;
 }
 
-.content {
-  padding: 1.25rem;
-}
-
-.title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.5rem;
-}
-
-.description {
-  color: #6b7280;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
+.line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tag {
-  background: #f0fdf4;
-  color: #059669;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 500;
 }
 </style> 

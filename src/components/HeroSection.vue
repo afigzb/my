@@ -5,16 +5,16 @@
     <BackgroundDecorator variant="hero" viewBox="0 0 1200 1000" />
     
     <!-- 与全局线条的连接装饰 -->
-    <div class="connection-elements">
-      <div class="connection-dot top"></div>
-      <div class="connection-dot bottom"></div>
+    <div class="connection-elements absolute left-[15%] top-0 bottom-0 z-[2] pointer-events-none">
+      <div class="connection-dot absolute w-1.5 h-1.5 bg-lime-500/80 rounded-full -left-0.5 top-[20%] shadow-lime-500/30 connection-dot-top"></div>
+      <div class="connection-dot absolute w-1.5 h-1.5 bg-lime-500/80 rounded-full -left-0.5 bottom-[15%] shadow-lime-500/30 connection-dot-bottom"></div>
     </div>
 
-    <div class="mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+    <div class="mx-auto px-4 sm:px-8 w-full relative z-10">
       <div class="text-center mx-auto">
         <!-- 欢迎文字动画 -->
-        <div class="animate-fade-in-up relative mb-8" style="animation-delay: 0.2s;">
-          <svg class="welcome-text-svg mx-auto" viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg">
+        <div class="animate-fade-in-up relative mb-6 sm:mb-8" style="animation-delay: 0.2s;">
+          <svg class="welcome-text-svg mx-auto w-full max-w-xs sm:max-w-md lg:max-w-2xl" viewBox="0 0 800 80" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" style="stop-color:#84cc16;stop-opacity:1" />
@@ -35,26 +35,26 @@
           </svg>
           
           <!-- 装饰性粒子效果 -->
-          <div class="particles-container">
-            <div class="particle" v-for="i in 8" :key="i" :style="getParticleStyle(i)"></div>
+          <div class="particles-container absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+            <div class="particle absolute w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gradient-to-r from-lime-500 to-green-500 rounded-full opacity-70 shadow-lime-500/50" v-for="i in 8" :key="i" :style="getParticleStyle(i)"></div>
           </div>
         </div>
 
         <!-- 副标题 -->
-        <p class="text-xl md:text-2xl mb-6 text-gray-600 max-w-2xl mx-auto animate-fade-in-up font-light" style="animation-delay: 0.6s;">
+        <p class="text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 text-gray-600 max-w-2xl mx-auto animate-fade-in-up font-light" style="animation-delay: 0.6s;">
           前端开发工程师
         </p>
 
         <!-- 描述文字 -->
-        <div class="mb-10 animate-fade-in-up" style="animation-delay: 0.8s;">
-          <p class="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
+        <div class="mb-8 sm:mb-10 animate-fade-in-up" style="animation-delay: 0.8s;">
+          <p class="text-sm sm:text-base lg:text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
             专注于创建优秀的用户体验，探索前端技术的无限可能
           </p>
         </div>
         
         <!-- 技能标签云 -->
-        <div class="mb-12 animate-fade-in-up" style="animation-delay: 1s;">
-          <div class="flex flex-wrap justify-center gap-3">
+        <div class="mb-10 sm:mb-12 animate-fade-in-up" style="animation-delay: 1s;">
+          <div class="flex flex-wrap justify-center gap-x-2 gap-y-12 sm:gap-x-3 sm:gap-y-3">
             <drag-follow 
               v-for="skill in skills" 
               :key="skill"
@@ -65,7 +65,7 @@
               max-bounce-times="6" 
               bounce-threshold="0.2"
             >
-              <span class="px-4 py-2 card-base card-hover text-sm font-medium cursor-pointer">
+              <span class="px-3 py-1.5 sm:px-4 sm:py-2 card-base card-hover text-xs sm:text-sm font-medium cursor-pointer">
                 {{ skill }}
               </span>
             </drag-follow>
@@ -73,7 +73,7 @@
         </div>
 
         <!-- CTA 按钮 - 添加回弹效果 -->
-        <div class="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style="animation-delay: 1.2s;">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center animate-fade-in-up" style="animation-delay: 1.2s;">
           <!-- 主要按钮 -->
           <drag-follow 
             max-offset="20" 
@@ -84,7 +84,7 @@
             bounce-threshold="0.3"
           >
             <button 
-              class="button-primary px-8 py-3"
+              class="button-primary px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base"
               @click="navigateToWorks"
             >
               查看我的作品
@@ -101,7 +101,7 @@
             bounce-threshold="0.3"
           >
             <button 
-              class="button-secondary px-8 py-3"
+              class="button-secondary px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base"
               @click="navigateToSkills"
             >
               了解技能
@@ -112,9 +112,9 @@
     </div>
 
     <!-- 向下滚动提示 -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-      <div class="w-6 h-10 border-2 border-lime-400 rounded-full flex justify-center bg-white/50 backdrop-blur-sm">
-        <div class="w-1 h-3 bg-lime-500 rounded-full mt-2 animate-scroll-indicator"></div>
+    <div class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div class="w-5 h-8 sm:w-6 sm:h-10 border-2 border-lime-400 rounded-full flex justify-center bg-white/50 backdrop-blur-sm">
+        <div class="w-0.5 h-2 sm:w-1 sm:h-3 bg-lime-500 rounded-full mt-1.5 sm:mt-2 animate-scroll-indicator"></div>
       </div>
     </div>
   </section>
@@ -189,33 +189,16 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 连接装饰元素 */
-.connection-elements {
-  position: absolute;
-  left: 15%;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
+/* 只保留Tailwind无法实现的复杂动画和样式 */
 .connection-dot {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: rgba(132, 204, 22, 0.8);
-  border-radius: 50%;
-  left: -2.5px;
   box-shadow: 0 0 10px rgba(132, 204, 22, 0.3);
 }
 
-.connection-dot.top {
-  top: 20%;
+.connection-dot-top {
   animation: float 6s ease-in-out infinite;
 }
 
-.connection-dot.bottom {
-  bottom: 15%;
+.connection-dot-bottom {
   animation: float 6s ease-in-out infinite 3s;
 }
 
@@ -272,24 +255,7 @@ onMounted(() => {
   }
 }
 
-/* 粒子效果样式 */
-.particles-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-}
-
 .particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: linear-gradient(45deg, #84cc16, #22c55e);
-  border-radius: 50%;
-  opacity: 0.7;
   animation: float 4s ease-in-out infinite;
   box-shadow: 0 0 10px rgba(132, 204, 22, 0.5);
 }

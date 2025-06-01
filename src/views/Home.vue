@@ -1,7 +1,7 @@
 <template>
   <div class="relative">    
     <!-- 滚动阻尼容器 -->
-    <sliding-damping damping="0.03" touch-damping="0.15" limit-speed="100">
+    <sliding-damping damping="0.03" limit-speed="100">
       <div class="global-vertical-line animate-vertical-pulse"></div>
 
       <!-- Hero 区域 - 立即加载 -->
@@ -29,15 +29,15 @@
       </div>
 
       <!-- 作品展示预览 - 部分懒加载 -->
-      <section class="section-base bg-white works-section py-12" data-section="works" ref="worksRef">
-        <div class="mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-black mb-4 animate-fade-in-up">精选作品</h2>
-            <p class="text-xl text-gray-600 animate-fade-in-up">展示我最近的一些项目作品</p>
+      <section class="section-base bg-white works-section py-8 sm:py-12" data-section="works" ref="worksRef">
+        <div class="mx-auto px-4 sm:px-8">
+          <div class="text-center mb-8 sm:mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold text-black mb-4 animate-fade-in-up">精选作品</h2>
+            <p class="text-lg sm:text-xl text-gray-600 animate-fade-in-up">展示我最近的一些项目作品</p>
           </div>
           
           <!-- 作品网格 - 轻量级组件，可以直接加载 -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-10">
             <WorkCard 
               v-for="work in featuredWorks" 
               :key="work.id" 
@@ -50,7 +50,7 @@
           <div class="text-center">
             <router-link 
               to="/works" 
-              class="button-secondary inline-flex items-center animate-fade-in-up"
+              class="button-secondary inline-flex items-center animate-fade-in-up text-sm sm:text-base px-6 py-2.5 sm:px-8 sm:py-3"
             >
               查看全部作品
             </router-link>
@@ -69,7 +69,7 @@
               <div class="loading-placeholder">
                 <div class="animate-pulse space-y-4">
                   <div class="h-8 bg-gray-200 rounded w-1/4 mx-auto"></div>
-                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                  <div class="grid grid-cols-2 gap-8 mt-8">
                     <div class="space-y-4">
                       <div v-for="i in 4" :key="i" class="h-20 bg-gray-200 rounded"></div>
                     </div>
@@ -198,7 +198,7 @@ onMounted(() => {
 <style scoped>
 /* 加载占位符样式 */
 .loading-placeholder {
-  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+  @apply max-w-6xl mx-auto px-8 py-16;
 }
 
 /* 全局竖向连接线 */
@@ -220,19 +220,6 @@ onMounted(() => {
   );
   z-index: 10;
   pointer-events: none;
-}
-
-/* 在不同屏幕尺寸调整位置 */
-@media (max-width: 1024px) {
-  .global-vertical-line {
-    left: 8%;
-  }
-}
-
-@media (max-width: 768px) {
-  .global-vertical-line {
-    left: 5%;
-  }
 }
 
 /* 确保滚动阻尼容器占满全屏 */

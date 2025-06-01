@@ -1,37 +1,37 @@
 <template>
-  <div class="works-container">
+  <div class=" overflow-hidden works-container min-h-screen bg-gradient-to-br from-lime-100/30 to-green-100/30 p-0 m-0">
     <!-- 背景装饰 -->
     <BackgroundDecorator variant="works" viewBox="0 0 1200 1000" />
 
     <div class="pb-16"></div>
     <!-- 翻页书 -->
-    <section class="works-section">
-      <div class="works-wrapper">
-        <div class="book-flex-container">
+    <section class="works-section relative z-10 pb-32 pt-16">
+      <div class="works-wrapper mx-auto px-6">
+        <div class="book-flex-container flex justify-center">
           <div id="worksBook" ref="worksBook" class="book-container">
             <!-- 封面 -->
             <div class="page cover">
-              <div class="cover-content">
-                <h2>作品集</h2>
-                <p>前端技术探索与实践</p>
-                <div class="operation-guide">
-                  <div class="guide-item">
-                    <svg class="guide-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="cover-content flex flex-col items-center h-full justify-center">
+                <h2 class="text-white text-4xl mb-4 font-light">作品集</h2>
+                <p class="text-white/90 text-lg mb-8">前端技术探索与实践</p>
+                <div class="operation-guide flex flex-col items-center mb-10">
+                  <div class="guide-item flex items-center mb-2">
+                    <svg class="guide-icon w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
-                    <span>点击图片查看演示</span>
+                    <span class="text-sm text-white/80">点击图片查看演示</span>
                   </div>
-                  <div class="guide-item">
-                    <svg class="guide-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div class="guide-item flex items-center mb-2">
+                    <svg class="guide-icon w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    <span>拖拽页面角落翻页</span>
+                    <span class="text-sm text-white/80">拖拽页面角落翻页</span>
                   </div>
                 </div>
-                <div class="cover-decoration">
-                  <div class="decoration-line"></div>
-                  <div class="decoration-circle"></div>
+                <div class="cover-decoration absolute bottom-15 w-50 h-15">
+                  <div class="decoration-line w-full h-0.5 bg-white/40 mb-5 rounded-sm"></div>
+                  <div class="decoration-circle w-10 h-10 border-2 border-white/40 rounded-full mx-auto"></div>
                 </div>
               </div>
             </div>
@@ -42,13 +42,13 @@
               :key="work.id" 
               class="page work-page"
             >
-              <div class="work-content">
-                <a :href="work.demoUrl" target="_blank" class="work-image-link">
+              <div class="work-content w-full max-w-420 h-full flex flex-col">
+                <a :href="work.demoUrl" target="_blank" class="work-image-link no-underline block">
                   <div class="work-image">
-                    <img :src="work.image" :alt="work.title" />
+                    <img :src="work.image" :alt="work.title" class="w-full h-full object-cover transition-transform duration-300" />
                     <div class="image-overlay">
                       <div class="demo-button">
-                        <svg class="demo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="demo-icon w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
@@ -57,10 +57,10 @@
                     </div>
                   </div>
                 </a>
-                <div class="work-info">
-                  <h3>{{ work.title }}</h3>
-                  <p class="work-desc">{{ work.description }}</p>
-                  <div class="work-tags">
+                <div class="work-info flex-1 flex flex-col text-left">
+                  <h3 class="text-gray-700 text-xl font-semibold mb-3 leading-tight">{{ work.title }}</h3>
+                  <p class="work-desc text-gray-500 text-sm leading-relaxed mb-5 flex-1">{{ work.description }}</p>
+                  <div class="work-tags flex flex-wrap gap-2 mb-5">
                     <span v-for="tag in work.tags" :key="tag" class="tag">
                       {{ tag }}
                     </span>
@@ -71,19 +71,19 @@
             
             <!-- 封底 -->
             <div class="page back-cover">
-              <div class="back-cover-content">
-                <h2>感谢浏览</h2>
-                <p>持续创新，永不止步</p>
-                <div class="back-decoration">
-                  <div class="progress-ring">
-                    <svg class="progress-svg" viewBox="0 0 100 100">
+              <div class="back-cover-content flex flex-col items-center h-full justify-center">
+                <h2 class="text-white text-3xl mb-4 font-light">感谢浏览</h2>
+                <p class="text-white/90 text-lg mb-8">持续创新，永不止步</p>
+                <div class="back-decoration mb-8">
+                  <div class="progress-ring relative w-20 h-20">
+                    <svg class="progress-svg w-full h-full -rotate-90" viewBox="0 0 100 100">
                       <circle cx="50" cy="50" r="45" class="progress-bg"/>
                       <circle cx="50" cy="50" r="45" class="progress-fill"/>
                     </svg>
-                    <div class="progress-text">∞</div>
+                    <div class="progress-text absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-light text-white">∞</div>
                   </div>
                 </div>
-                <p class="back-subtitle">更多精彩项目敬请期待</p>
+                <p class="back-subtitle text-white/80 text-sm">更多精彩项目敬请期待</p>
               </div>
             </div>
           </div>
@@ -126,8 +126,7 @@ const initPageFlip = () => {
         maxShadowOpacity: 0.5,
         usePortrait: true,
         autoSize: true,
-        showCover: false,
-        mobileScrollSupport: true
+        showCover: false
       })
 
       pageFlip.loadFromHTML(pages)
@@ -138,44 +137,13 @@ const initPageFlip = () => {
 </script>
 
 <style>
-/* 主容器样式 */
-.works-container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, rgba(236, 252, 203, 0.3) 0%, rgba(220, 252, 231, 0.3) 100%);
-  padding: 0;
-  margin: 0;
-}
+/* 只保留Tailwind无法实现的复杂样式和page-flip必需样式 */
 
-.works-section {
-  position: relative;
-  z-index: 10;
-  padding-bottom: 8rem;
-  padding-top: 4rem;
-}
-
-.works-wrapper {
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.book-flex-container {
-  display: flex;
-  justify-content: center;
-}
-
-/* SVG 图标样式 */
-.demo-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 0.5rem;
-}
-
-/* 书本容器 */
+/* 书本容器 - page-flip需要的核心样式 */
 .book-container {
   margin: 20px auto;
   box-shadow: 0 20px 60px rgba(0,0,0,0.15);
   border-radius: 12px;
-  overflow: hidden;
 }
 
 .page {
@@ -191,127 +159,34 @@ const initPageFlip = () => {
   user-select: none;
 }
 
-/* 封面样式 - 调整为更柔和但仍有深度的颜色 */
+/* 封面和封底的复杂渐变背景 */
 .page.cover {
   background: linear-gradient(135deg, #65a30d 0%, #16a34a 50%, #0891b2 100%);
   color: white;
 }
 
-.cover-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  justify-content: center;
-}
-
 .page.cover h2 {
-  color: white;
-  font-size: 36px;
-  margin-bottom: 15px;
-  font-weight: 300;
   text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .page.cover p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 18px;
-  margin-bottom: 30px;
   text-shadow: 0 1px 5px rgba(0,0,0,0.2);
 }
 
-.operation-guide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-.guide-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.guide-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 0.5rem;
-}
-
-.guide-item span {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.cover-decoration {
-  position: absolute;
-  bottom: 60px;
-  width: 200px;
-  height: 60px;
-}
-
-.decoration-line {
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.4);
-  margin-bottom: 20px;
-  border-radius: 1px;
-}
-
-.decoration-circle {
-  width: 40px;
-  height: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
-  margin: 0 auto;
-}
-
-/* 封底样式 - 改回绿色系 */
 .page.back-cover {
   background: linear-gradient(135deg, #48d1a6 0%, #189672 100%);
   color: white;
 }
 
-.back-cover-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  justify-content: center;
-}
-
 .page.back-cover h2 {
-  color: white;
-  font-size: 32px;
-  margin-bottom: 15px;
-  font-weight: 300;
   text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .page.back-cover p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 18px;
-  margin-bottom: 30px;
   text-shadow: 0 1px 5px rgba(0,0,0,0.2);
 }
 
-.back-decoration {
-  margin-bottom: 30px;
-}
-
-.progress-ring {
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-
-.progress-svg {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
+/* 复杂动画 */
 .progress-bg {
   fill: none;
   stroke: rgba(255, 255, 255, 0.3);
@@ -327,21 +202,6 @@ const initPageFlip = () => {
   animation: progressAnimation 3s ease-in-out infinite;
 }
 
-.progress-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  font-weight: 300;
-  color: white;
-}
-
-.back-subtitle {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-}
-
 @keyframes progressAnimation {
   0% { stroke-dashoffset: 283; }
   50% { stroke-dashoffset: 70; }
@@ -354,19 +214,7 @@ const initPageFlip = () => {
   background: linear-gradient(135deg, #fefefe 0%, #f9fafb 100%);
 }
 
-.work-content {
-  width: 100%;
-  max-width: 420px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.work-image-link {
-  text-decoration: none;
-  display: block;
-}
-
+/* 复杂的悬停效果和backdrop-filter */
 .work-image {
   width: 100%;
   height: 220px;
@@ -382,13 +230,6 @@ const initPageFlip = () => {
 .work-image:hover {
   transform: translateY(-4px);
   box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-}
-
-.work-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
 .work-image:hover img {
@@ -433,36 +274,6 @@ const initPageFlip = () => {
   background: rgba(255, 255, 255, 1);
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.work-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.work-info h3 {
-  color: #374151;
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.work-desc {
-  color: #6b7280;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  flex: 1;
-}
-
-.work-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
 }
 
 .tag {
