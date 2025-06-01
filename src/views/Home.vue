@@ -32,8 +32,8 @@
       <section class="section-base bg-white works-section py-8 sm:py-12" data-section="works" ref="worksRef">
         <div class="mx-auto px-4 sm:px-8">
           <div class="text-center mb-8 sm:mb-12">
-            <h2 class="text-3xl sm:text-4xl font-bold text-black mb-4 animate-fade-in-up">精选作品</h2>
-            <p class="text-lg sm:text-xl text-gray-600 animate-fade-in-up">展示我最近的一些项目作品</p>
+            <h2 class="text-3xl sm:text-4xl font-bold text-black mb-4 animate-fade-in-up">作品精选</h2>
+            <p class="text-lg sm:text-xl text-gray-600 animate-fade-in-up">部分最近制作的项目作品</p>
           </div>
           
           <!-- 作品网格 - 轻量级组件，可以直接加载 -->

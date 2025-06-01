@@ -43,8 +43,8 @@
               class="page work-page"
             >
               <div class="work-content w-full max-w-420 h-full flex flex-col">
-                <a :href="work.demoUrl" target="_blank" class="work-image-link no-underline block">
-                  <div class="work-image">
+                <a :href="work.demoUrl" target="_blank" class="work-image-link no-underline block" @click.stop>
+                  <div class="work-image" @mousedown.stop>
                     <img :src="work.image" :alt="work.title" class="w-full h-full object-cover transition-transform duration-300" />
                     <div class="image-overlay">
                       <div class="demo-button">
@@ -227,12 +227,13 @@ const initPageFlip = () => {
   transition: all 0.3s ease;
 }
 
-.work-image:hover {
+/* 只在非拖拽状态下应用悬停效果 */
+.work-image:hover:not(:active) {
   transform: translateY(-4px);
   box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
-.work-image:hover img {
+.work-image:hover:not(:active) img {
   transform: scale(1.05);
 }
 

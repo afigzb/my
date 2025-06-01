@@ -27,7 +27,7 @@
 
         <!-- 技能标签云 -->
         <div class="mb-12 sm:mb-16 animate-fade-in-up" style="animation-delay: 0.4s;">
-          <div class="flex flex-wrap justify-center gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-3 max-w-5xl mx-auto leading-relaxed">
+          <div class="flex flex-wrap justify-center gap-x-3 gap-y-4 sm:gap-x-4 sm:gap-y-5 max-w-5xl mx-auto leading-relaxed">
             <drag-follow 
               v-for="(tag, index) in skillTags" 
               :key="tag"
