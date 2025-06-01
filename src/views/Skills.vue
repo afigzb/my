@@ -355,7 +355,7 @@ const techStack = ref([
     name: 'JavaScript',
     category: '编程语言 & 抽象思维',
     icon: 'JS',
-    description: '基于LitElement构建组件库，熟悉现代前端架构设计、状态管理和性能优化。',
+    description: '基于LitElement构建企业组件库。',
     projects: [
       '虚拟滚动组件：三层架构分离 - VirtualLogic视口计算、ScrollLogic位置追踪、RenderLogic节点池复用，支持10万+数据流畅渲染',
       '时间滚轮选择器：基于scrollTop精确定位，实现无限循环滚动与居中吸附，支持触摸和鼠标交互',
@@ -395,7 +395,7 @@ const techStack = ref([
     name: 'CSS3 & 视觉特效',
     category: '视觉效果 & 高级CSS技术',
     icon: 'C',
-    description: '深入运用CSS高级特性创造视觉效果。通过阴影叠加、路径裁剪、滤镜变换等技术实现复杂的视觉表现，注重性能优化和浏览器兼容性。',
+    description: '运用CSS特性创造视觉效果。通过阴影叠加、路径裁剪、滤镜变换等技术实现复杂的视觉表现。',
     projects: [
       '阴影叠加技术：利用多层text-shadow和box-shadow创建描边、发光、3D立体等效果，通过阴影偏移和模糊半径控制视觉层次',
       '路径裁剪系统：运用clip-path和SVG path实现复杂图形裁剪，结合CSS动画创建动态的可视区域变化效果',
@@ -408,7 +408,7 @@ const techStack = ref([
     name: 'Canvas & 图形编程',
     category: '图形渲染 & 基础应用',
     icon: 'CV',
-    description: 'Canvas 2D图形编程的学习和实践。主要是基础的绘图操作和简单的动画效果，通过教学项目理解图形渲染的基本原理，但还没有涉及复杂的综合应用。',
+    description: 'Canvas 2D图形编程的学习和实践。主要是基础的绘图操作和简单的动画效果，通过教学项目理解图形渲染的基本原理。',
     projects: [
       '基础绘图教学：Canvas基本绘图API的学习和演示，包括路径绘制、填充描边、图形变换等基础操作',
       '简单动画效果：requestAnimationFrame实现基础动画循环，粒子移动、颜色变化等简单的动态效果',
@@ -421,7 +421,7 @@ const techStack = ref([
     name: 'ECharts 数据可视化',
     category: '抽象设计 & 架构能力',
     icon: 'E',
-    description: '设计图表工厂系统，将8种不同图表类型抽象为统一配置模型。通过多层抽象设计（图表类型->坐标系统->配置生成），实现高度可扩展的企业级图表解决方案。',
+    description: '设计图表工厂系统，将8种不同图表类型抽象为统一配置模型。通过多层抽象设计（图表类型->坐标系统->配置生成），实现高度可扩展的图表解决方案。',
     projects: [
       '多层抽象架构：CHART_TYPE_CONFIGS抽象图表类型，COORDINATE_SYSTEMS抽象坐标系统，将复杂的ECharts配置抽象为简洁的工厂接口',
       '配置驱动模式：通过generateOptions核心算法，将数据对象和配置参数转换为完整ECharts配置，支持深度合并、主题切换、预设模式',
@@ -434,7 +434,7 @@ const techStack = ref([
     name: 'Unity & C#',
     category: '毕业设计 & 游戏开发',
     icon: 'U',
-    description: '毕业设计项目，较为完整的2D横版游戏开发。虽然Unity提供了很多封装功能，但作为毕业设计需要整体规划、系统设计和完整实现，涉及游戏机制设计、代码架构、关卡设计等。',
+    description: '毕业设计项目，较为完整的2D横版游戏开发。走完整体规划、系统设计和完整实现的全部流程，涉及游戏机制设计、代码架构、关卡设计等。',
     projects: [
       '游戏开发：较为全面的2D横版动作游戏，包含关卡制作、敌人AI、道具系统、存档点',
       '游戏系统设计：角色控制系统、战斗系统、、技能装备系统的整体架构设计和实现，状态机管理角色行为',
@@ -446,7 +446,7 @@ const techStack = ref([
     name: 'Vite & 现代工具链',
     category: '基础工程化 & 静态部署',
     icon: 'VT',
-    description: '基础的现代前端工具使用，主要是利用Vite的默认配置进行项目构建和开发。了解静态部署流程，能够将项目打包上传到阿里云。',
+    description: '基础的现代前端工具使用，主要是利用Vite的默认配置进行项目构建和开发。走通静态资源打包上传到阿里云的流程。',
     projects: [
       '项目构建：使用Vite默认配置进行Vue项目的开发和打包，基本的npm run dev和npm run build操作',
       '静态部署：将打包后的dist文件夹部署到阿里云云服务器，了解基础的部署流程和域名配置',
