@@ -2,12 +2,91 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue</title>
+    <title>个人作品展示</title>
   </head>
   <body>
+    <!-- 小屏幕提示 -->
+    <div id="mobile-notice" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4" style="display: none;">
+      <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="notice-content">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">📱 移动端提示</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              当前屏幕尺寸较小，可能无法完整展示所有交互效果和视觉特效。<br>
+              建议使用桌面端浏览以获得最佳体验。
+            </p>
+          </div>
+          <button id="close-notice" class="ml-3 text-gray-400 hover:text-gray-600 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex justify-end">
+          <button id="understand-btn" class="px-4 py-2 bg-lime-500 text-white text-sm font-medium rounded-lg hover:bg-lime-600 transition-colors">
+            我知道了
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    
+    <script>
+      // 小屏幕提示逻辑
+      (function() {
+        const STORAGE_KEY = 'mobile-notice-shown';
+        const notice = document.getElementById('mobile-notice');
+        const noticeContent = document.getElementById('notice-content');
+        const closeBtn = document.getElementById('close-notice');
+        const understandBtn = document.getElementById('understand-btn');
+        
+        // 检查是否为小屏幕且未显示过提示
+        function shouldShowNotice() {
+          return window.innerWidth < 768 && !localStorage.getItem(STORAGE_KEY);
+        }
+        
+        // 显示提示
+        function showNotice() {
+          notice.style.display = 'flex';
+          setTimeout(() => {
+            noticeContent.style.transform = 'scale(1)';
+            noticeContent.style.opacity = '1';
+          }, 100);
+          
+          // 10秒后自动关闭
+          setTimeout(hideNotice, 10000);
+        }
+        
+        // 隐藏提示
+        function hideNotice() {
+          localStorage.setItem(STORAGE_KEY, 'true');
+          noticeContent.style.transform = 'scale(0.95)';
+          noticeContent.style.opacity = '0';
+          setTimeout(() => {
+            notice.style.display = 'none';
+          }, 300);
+        }
+        
+        // 绑定事件
+        closeBtn.addEventListener('click', hideNotice);
+        understandBtn.addEventListener('click', hideNotice);
+        
+        // 点击背景关闭
+        notice.addEventListener('click', (e) => {
+          if (e.target === notice) hideNotice();
+        });
+        
+        // 页面加载完成后检查是否需要显示
+        document.addEventListener('DOMContentLoaded', () => {
+          if (shouldShowNotice()) {
+            setTimeout(showNotice, 1000); // 延迟1秒显示
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

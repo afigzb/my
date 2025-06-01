@@ -29,8 +29,8 @@
                     <span class="text-sm text-white/80">拖拽页面角落翻页</span>
                   </div>
                 </div>
-                <div class="cover-decoration absolute bottom-15 w-50 h-15">
-                  <div class="decoration-line w-full h-0.5 bg-white/40 mb-5 rounded-sm"></div>
+                <div class="cover-decoration absolute bottom-16 left-1/2 transform -translate-x-1/2 w-48 h-16">
+                  <div class="decoration-line w-full h-0.5 bg-white/40 mb-6 rounded-sm"></div>
                   <div class="decoration-circle w-10 h-10 border-2 border-white/40 rounded-full mx-auto"></div>
                 </div>
               </div>
@@ -118,7 +118,7 @@ const initPageFlip = () => {
     
     if (pages.length > 0) {
       pageFlip = new window.St.PageFlip(worksBook.value, {
-        width: 500,
+        width: 600,
         height: 600,
         size: "fixed",
         flippingTime: 1000,
