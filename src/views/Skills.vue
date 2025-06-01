@@ -353,121 +353,119 @@ const skillTags = ref([
 const techStack = ref([
   {
     name: 'JavaScript',
-    category: '编程语言 & 架构设计',
+    category: '编程语言 & 抽象思维',
     icon: 'JS',
-    description: '深度掌握ES6+语法，精通组件化架构设计、设计模式应用、性能优化算法。具备复杂业务逻辑抽象能力和高质量代码组织能力。',
+    description: '基于LitElement构建组件库，熟悉现代前端架构设计、状态管理和性能优化。',
     projects: [
-      '虚拟滚动组件：VirtualLogic视口计算、ScrollLogic位置追踪、RenderLogic DOM节点池复用',
-      '级联选择器：Observable响应式状态管理、动态列生成、纯函数数据驱动设计',
-      '日历组件：多视图策略模式、四层架构设计、按需CSS加载、观察者事件系统',
-      '穿梭框组件：抽象基类设计、继承扩展模式、虚拟分页、复杂全选逻辑',
-      '单列选择器：取模算法无限滚动、scrollTop计算定位、物理阻尼回弹效果'
+      '虚拟滚动组件：三层架构分离 - VirtualLogic视口计算、ScrollLogic位置追踪、RenderLogic节点池复用，支持10万+数据流畅渲染',
+      '时间滚轮选择器：基于scrollTop精确定位，实现无限循环滚动与居中吸附，支持触摸和鼠标交互',
+      '级联选择器：采用Observable状态管理 + 分层架构，通过CascadingState实现数据驱动的多级联动',
+      '日历组件：MVC架构 + 按需CSS加载，支持年/月/周/日/编辑/范围等多视图，基于观察者模式的事件系统',
+      '穿梭框组件：继承式架构设计，封装TransferDataManager数据层，支持虚拟分页和表格模式扩展'
     ],
-    technologies: ['设计模式', '算法应用', '性能优化', '架构设计', '状态管理']
+    technologies: ['LitElement', '性能优化', '开发模式', '状态管理', '模板解析']
   },
   {
     name: 'Web Components',
     category: '现代组件技术',
     icon: 'WC',
-    description: '主导企业级组件库开发，熟练运用LitElement、Shadow DOM实现高质量可复用组件。深入理解组件生命周期和物理模拟在交互中的应用。',
+    description: '个人组件库开发，运用Web Components实现泛用的前端组件。利用物理模拟的方式实现了具备交互性的组件，并将其发表在个人博客。',
     projects: [
-      '交互组件库：LitElement企业级组件系统、Shadow DOM样式隔离',
-      '拖拽跟随组件：胡克定律物理弹性效果、阻尼模型真实回弹模拟',
-      '滚动阻尼组件：物理模型GPU加速、requestAnimationFrame优化、双端适配',
-      '音频控制器：Web Audio API集成、实时波形显示、音频处理算法',
-      '代码编辑预览器：实时编译预览、语法高亮、错误提示系统'
+      '弹性回弹组件：通过deltaTime时间增量驱动物理计算，每帧计算弹簧力与阻尼力的合力更新速度位置，配合速度方向检测控制回弹次数实现自然衰减效果',
+      '滚动阻尼组件：采用currentY += (targetY - currentY) * damping线性插值公式，配合will-change+transform触发GPU合成层，按设备类型动态调节阻尼系数优化触控体验',
+      '音频播放器：设计Data-Controller-Component三层架构解耦业务逻辑与UI渲染，通过TrackSwitchController实现四种播放模式的切歌算法，状态变化采用观察者模式自动更新界面',
+      '代码编辑预览器：构建ES6模块转换引擎处理export/import语法转换，通过FileManager实现多文件依赖加载与代码合并，最终写入iframe文档流实现模块化代码的实时预览'
     ],
-    technologies: ['LitElement', 'Shadow DOM', '物理模拟', 'Web Audio API', '实时编译']
+    technologies: ['Web Components', 'Shadow DOM', '物理模拟', 'ES6语法转换', '模块化架构']
   },
   {
     name: 'Vue.js',
     category: '前端框架 & 性能优化',
     icon: 'V',
-    description: '深度运用Vue生态，擅长性能优化和用户体验提升。实现复杂交互动画、懒加载优化、响应式布局等高级功能。',
+    description: '个人作品展示网站开发。通过懒加载、异步组件、css动画等技术提升用户体验，集成上一条目中的Web Components组件库，开发一个属于自己作品的展示网站。',
     projects: [
-      '个人作品网站：懒加载分段式加载、路由预加载、首屏优化',
-      '响应式时间轴：动态动画系统、滚动监听优化、Intersection Observer应用',
-      '拖拽集成：自定义指令封装、组件通信、状态同步机制',
-      '组件化架构：Composition API深度应用、Pinia状态管理、TypeScript集成'
+      '懒加载分段式：在"首页"利用defineAsyncComponent异步加载重型组件，Suspense处理加载状态，延迟加载次要功能避免阻塞首屏',
+      '响应式时间轴：在"技能"页面利用Intersection Observer智能触发组件加载，结合CSS动画实现滚动监听的渐入效果，提前200px预加载优化体验',
+      '路由过渡优化：自定义circle-expand过渡动画，mode="out-in"避免布局闪烁，clip-path实现圆形扩散效果',
+      'Web组件集成：动态加载自研组件库（拖拽、音频、代码编辑器），并避免重复加载，模块化管理组件依赖'
     ],
-    technologies: ['Composition API', '性能优化', '懒加载', '动画系统', '响应式设计']
+    technologies: ['Vue3 Composition', 'defineAsyncComponent', 'Intersection Observer', 'Suspense', 'Web Components集成']
   },
   {
     name: 'CSS3 & 视觉特效',
-    category: '视觉效果 & 动画技术',
+    category: '视觉效果 & 高级CSS技术',
     icon: 'C',
-    description: '精通现代CSS技术和视觉特效开发，创造性地运用CSS实现复杂视觉效果。结合物理原理设计自然流畅的动画交互。',
+    description: '深入运用CSS高级特性创造视觉效果。通过阴影叠加、路径裁剪、滤镜变换等技术实现复杂的视觉表现，注重性能优化和浏览器兼容性。',
     projects: [
-      '特效库：12种CSS特效（3D变换、霓虹光效、金属质感、文本描边）',
-      '故障艺术：RGB通道分离、动态裁剪路径、Shadow DOM封装',
-      '响应式系统：Tailwind CSS工程化、原子化设计、主题系统',
-      'GPU加速动画：transform3d优化、will-change性能提升、60fps流畅体验'
+      '阴影叠加技术：利用多层text-shadow和box-shadow创建描边、发光、3D立体等效果，通过阴影偏移和模糊半径控制视觉层次',
+      '路径裁剪系统：运用clip-path和SVG path实现复杂图形裁剪，结合CSS动画创建动态的可视区域变化效果',
+      '滤镜合成应用：使用filter属性的blur、contrast、brightness等进行图像处理，实现融球效果等视觉合成',
+      'GPU合成层优化：通过transform3d、will-change触发硬件加速，配合backdrop-filter实现高性能的模糊和透明效果'
     ],
-    technologies: ['视觉特效', '3D动画', 'GPU加速', 'Tailwind CSS', '故障艺术']
+    technologies: ['多层阴影', 'clip-path裁剪', 'CSS滤镜', 'GPU硬件加速', 'SVG路径']
   },
   {
     name: 'Canvas & 图形编程',
-    category: '图形渲染 & 算法应用',
+    category: '图形渲染 & 基础应用',
     icon: 'CV',
-    description: '掌握Canvas 2D渲染和Path路径操作，实现粒子系统、实时图形渲染等复杂视觉效果。结合数学算法创造流畅的动画体验。',
+    description: 'Canvas 2D图形编程的学习和实践。主要是基础的绘图操作和简单的动画效果，通过教学项目理解图形渲染的基本原理，但还没有涉及复杂的综合应用。',
     projects: [
-      '粒子系统：实时粒子追踪渲染、物理碰撞检测、性能优化',
-      '光标特效：Canvas粒子跟随、mix-blend-mode差值混合、动态轨迹生成',
-      '绘图工具：Path路径绘制、图形变换算法、实时预览系统',
-      '数据可视化：自定义图表渲染、动态数据绑定、交互式图形'
+      '基础绘图教学：Canvas基本绘图API的学习和演示，包括路径绘制、填充描边、图形变换等基础操作',
+      '简单动画效果：requestAnimationFrame实现基础动画循环，粒子移动、颜色变化等简单的动态效果',
+      '交互响应处理：鼠标事件监听和Canvas坐标转换，实现基本的鼠标跟随和点击响应',
+      '教学项目整理：将学习过程整理成教程页面，利用之前做的代码展示组件，构造出完整的教学页面'
     ],
-    technologies: ['Canvas 2D', 'Path API', '粒子系统', '图形算法', '实时渲染']
+    technologies: ['Canvas 2D API', '基础动画', '事件处理', '坐标变换', '教学演示']
   },
   {
     name: 'ECharts 数据可视化',
-    category: '数据可视化 & 工厂模式',
+    category: '抽象设计 & 架构能力',
     icon: 'E',
-    description: '构建企业级图表工厂系统，运用工厂模式和模块化设计统一管理图表配置。深度定制ECharts满足复杂业务需求。',
+    description: '设计图表工厂系统，将8种不同图表类型抽象为统一配置模型。通过多层抽象设计（图表类型->坐标系统->配置生成），实现高度可扩展的企业级图表解决方案。',
     projects: [
-      '图表工厂：8种图表类型工厂模式封装（直角坐标系、极坐标系、无坐标系）',
-      '配置系统：模块化配置策略、主题动态切换、响应式适配算法',
-      '交互增强：自定义tooltip、图表联动、实时数据更新机制',
-      '性能优化：大数据量渲染优化、Canvas/SVG渲染切换、内存管理'
+      '多层抽象架构：CHART_TYPE_CONFIGS抽象图表类型，COORDINATE_SYSTEMS抽象坐标系统，将复杂的ECharts配置抽象为简洁的工厂接口',
+      '配置驱动模式：通过generateOptions核心算法，将数据对象和配置参数转换为完整ECharts配置，支持深度合并、主题切换、预设模式',
+      '工厂模式实现：EChartFactory2类封装图表生命周期管理，支持链式调用、动态类型切换、响应式更新，统一8种图表的创建逻辑',
+      '插件化系统设计：主题系统、工具箱配置、预设配置的模块化管理，支持运行时动态扩展和自定义样式注入'
     ],
-    technologies: ['工厂模式', '模块化配置', '大数据渲染', '图表联动', '主题系统']
+    technologies: ['工厂设计模式', '多层抽象', '配置驱动', '插件化架构', '生命周期管理']
   },
   {
     name: 'Unity & C#',
-    category: '游戏开发 & 物理模拟',
+    category: '毕业设计 & 游戏开发',
     icon: 'U',
-    description: '具备2D游戏开发经验，理解物理模拟、状态机等核心概念。将游戏开发的交互理念应用到前端开发中，提升用户体验。',
+    description: '毕业设计项目，较为完整的2D横版游戏开发。虽然Unity提供了很多封装功能，但作为毕业设计需要整体规划、系统设计和完整实现，涉及游戏机制设计、代码架构、关卡设计等。',
     projects: [
-      '2D横版游戏：类恶魔城游戏机制、角色控制器、关卡设计',
-      '物理系统：碰撞检测算法、重力模拟、弹性碰撞计算',
-      '状态机：游戏状态管理、动画状态转换、事件驱动架构',
-      '交互设计：游戏UI系统、输入处理、反馈机制设计'
+      '游戏开发：较为全面的2D横版动作游戏，包含关卡制作、敌人AI、道具系统、存档点',
+      '游戏系统设计：角色控制系统、战斗系统、、技能装备系统的整体架构设计和实现，状态机管理角色行为',
+      '项目管理：作为毕业设计的完整项目流程，从需求分析到最终答辩，锻炼了项目规划和执行能力'
     ],
-    technologies: ['2D游戏开发', '物理模拟', '状态机', '碰撞检测', '交互设计']
+    technologies: ['Unity 2D开发', 'C#编程', '游戏系统设计', '项目经验', '毕业设计答辩']
   },
   {
     name: 'Vite & 现代工具链',
-    category: '工程化 & 构建优化',
+    category: '基础工程化 & 静态部署',
     icon: 'VT',
-    description: '深度应用现代前端工具链，优化开发体验和构建性能。熟练配置复杂项目的打包、热更新、代码分割等工程化需求。',
+    description: '基础的现代前端工具使用，主要是利用Vite的默认配置进行项目构建和开发。了解静态部署流程，能够将项目打包上传到阿里云。',
     projects: [
-      '构建优化：多项目Vite配置、代码分割策略、打包体积优化',
-      '开发效率：热更新配置、模块替换、开发服务器优化',
-      '插件开发：自定义Vite插件、构建流程扩展、自动化部署',
-      '性能监控：构建分析、bundle大小监控、加载性能优化'
+      '项目构建：使用Vite默认配置进行Vue项目的开发和打包，基本的npm run dev和npm run build操作',
+      '静态部署：将打包后的dist文件夹部署到阿里云云服务器，了解基础的部署流程和域名配置',
+      '开发环境：利用Vite的热更新功能进行开发，了解基本的开发服务器配置',
+      '依赖管理：使用npm进行包管理，了解package.json最简单的配置'
     ],
-    technologies: ['模块化打包', '热更新', '插件开发', '性能监控', '自动化部署']
+    technologies: ['Vite基础使用', 'npm包管理', '静态部署']
   },
   {
     name: '综合设计能力',
     category: 'UI设计 & 内容创作',
     icon: 'DS',
-    description: '从技术实现到视觉设计的综合能力。擅长将技术与设计结合，创造有温度的用户体验。',
+    description: '从技术实现到视觉设计的综合能力。将写好的组件库与设计结合，独立完成从设计到实现的个人页面开发。',
     projects: [
-      'UI设计：个人作品网站整体UI设计，响应式布局规划，视觉层次构建',
+      'UI设计：个人作品网站整体UI设计，响应式布局规划，视觉效果构建',
       '文档编写：技术博客内容创作，Markdown文档编写，项目说明文档',
       'Office应用：Word文档排版，Excel数据处理，PPT演示文稿制作'
     ],
-    technologies: ['UI/UX设计', 'Photoshop', 'Markdown', 'Office套件', '内容创作']
+    technologies: ['UI/UX设计', 'Markdown', 'Office套件', '内容创作']
   }
 ])
 

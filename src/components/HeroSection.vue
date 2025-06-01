@@ -130,7 +130,7 @@ const router = useRouter()
 const heroSection = ref(null)
 
 // 技能列表
-const skills = ['Vue.js', 'JavaScript', '‌Ant Design', 'webComponent', 'C#']
+const skills = ['Vue.js', 'JavaScript', 'Canvas', 'webComponent', 'C#']
 
 // 页面跳转方法
 const navigateToWorks = () => {
