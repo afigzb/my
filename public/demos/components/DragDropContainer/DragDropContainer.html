@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽容器组件 - 制作思路教学</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .explanation {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .section {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .section p {
+            margin-bottom: 10px;
+        }
+
+        .code-snippet {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .demo-area {
+            background: #f0f2f5;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            height: 600px;
+            border: 2px dashed #d1d5db;
+        }
+
+        .demo-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .demo-box {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: move;
+            user-select: none;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .demo-box:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 12px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-area {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 拖拽容器组件教学</h1>
+            <p>从零开始理解现代 Web 拖拽组件的设计与实现</p>
+        </div>
+
+        <div class="content">
+            <div class="explanation">
+                <div class="section">
+                    <h3>💡 核心设计思路</h3>
+                    <p>制作一个通用的拖拽容器，关键在于分离<span class="highlight">拖拽逻辑</span>和<span class="highlight">内容展示</span>：</p>
+                    <ul class="step-list">
+                        <li>使用 Web Components 封装拖拽逻辑</li>
+                        <li>通过 slot 插槽让任何内容都可拖拽</li>
+                        <li>统一处理鼠标和触摸事件</li>
+                        <li>添加惯性动画提升用户体验</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>🔧 技术架构</h3>
+                    <p>基于 <strong>LitElement</strong> 构建，核心包含：</p>
+                    <div class="code-snippet">// 核心属性
+isDragging: 拖拽状态
+position: { x, y } 当前位置
+velocity: { x, y } 速度向量
+hasDragged: 是否已拖拽</div>
+                </div>
+
+                <div class="section">
+                    <h3>📱 事件处理策略</h3>
+                    <p>统一的指针事件处理，兼容桌面和移动端：</p>
+                    <div class="code-snippet">// 统一事件处理
+getEventCoords(e) {
+  return e.touches ? 
+    { x: e.touches[0].clientX, y: e.touches[0].clientY } :
+    { x: e.clientX, y: e.clientY };
+}</div>
+                </div>
+
+                <div class="section">
+                    <h3>🎮 交互优化</h3>
+                    <ul class="step-list">
+                        <li>智能识别交互元素，避免误触发拖拽</li>
+                        <li>设置拖拽阈值，区分点击和拖拽</li>
+                        <li>边界检测，防止拖出屏幕</li>
+                        <li>惯性滚动，模拟物理效果</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>⚡ 性能考虑</h3>
+                    <p>关键优化点：</p>
+                    <ul class="step-list">
+                        <li>使用 <code>transform</code> 替代改变 <code>left/top</code></li>
+                        <li>拖拽时禁用 CSS 过渡效果</li>
+                        <li>限制事件处理深度避免性能问题</li>
+                        <li>合理使用 <code>requestAnimationFrame</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-area">
+                <div class="demo-title">🎯 实时演示区域</div>
+                <draggable-container initial-x-percent="50" initial-y-percent="30">
+                    <div class="demo-box">
+                        🚀 拖拽我试试！<br>
+                        <small>支持鼠标和触摸</small>
+                    </div>
+                </draggable-container>
+
+                <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; text-align: center; color: #666; font-size: 0.9rem;">
+                    💡 提示：可以拖拽上方的盒子，体验惯性效果和边界限制
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./DragDropContainer.js"></script>
+</body>
+</html>

@@ -85,7 +85,7 @@
 
     <!-- 音乐播放器 - 延迟加载，避免阻塞首屏 -->
     <div v-if="shouldLoadAudioPlayer">
-      <draggable-container initial-x-percent="90" initial-y-percent="85">
+      <draggable-container initial-x-percent="85" initial-y-percent="85">
         <audio-player
           audio-base-path="/demos/components/AudioPlayer/audio/"
           initial-volume="40"

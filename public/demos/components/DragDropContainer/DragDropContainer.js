@@ -1,4 +1,4 @@
-import { LitElement, html, css } from '/vendor/lit-core.min.js';
+import { LitElement, html, css } from '../../../vendor/lit-core.min.js';
 
 export class DraggableContainer extends LitElement {
     static styles = css`
@@ -59,41 +59,43 @@ export class DraggableContainer extends LitElement {
         this.initialXPercent = 0;
         this.initialYPercent = 0;
         
-        // 拖拽相关
+        // 拖拽状态
         this.startPos = { x: 0, y: 0 };
         this.initialPos = { x: 0, y: 0 };
         this.velocity = { x: 0, y: 0 };
         this.lastPos = { x: 0, y: 0 };
         this.lastTime = 0;
-        
-        // 拖拽检测
         this.hasDragged = false;
-        this.dragThreshold = 5;
         this.preventClickTimeout = null;
         
-        // 惯性参数
+        // 简化的参数
         this.DECELERATION = 0.95;
         this.MIN_VELOCITY = 0.5;
         this.VELOCITY_SCALE = 0.15;
 
-        // 绑定事件
         this.bindEvents();
     }
 
     bindEvents() {
-        this.handleMouseDown = this.handleMouseDown.bind(this);
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.handleMouseUp = this.handleMouseUp.bind(this);
+        this.handlePointerDown = this.handlePointerDown.bind(this);
+        this.handlePointerMove = this.handlePointerMove.bind(this);
+        this.handlePointerUp = this.handlePointerUp.bind(this);
         this.handleSelectStart = this.handleSelectStart.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
     firstUpdated() {
-        this.addEventListener('mousedown', this.handleMouseDown);
+        // 统一的指针事件处理
+        this.addEventListener('mousedown', this.handlePointerDown);
+        this.addEventListener('touchstart', this.handlePointerDown, { passive: false });
+        
         this.addEventListener('selectstart', this.handleSelectStart);
         this.addEventListener('click', this.handleClick, true);
-        document.addEventListener('mousemove', this.handleMouseMove);
-        document.addEventListener('mouseup', this.handleMouseUp);
+        
+        document.addEventListener('mousemove', this.handlePointerMove);
+        document.addEventListener('touchmove', this.handlePointerMove, { passive: false });
+        document.addEventListener('mouseup', this.handlePointerUp);
+        document.addEventListener('touchend', this.handlePointerUp);
         
         // 设置初始位置
         this.setInitialPosition();
@@ -101,8 +103,11 @@ export class DraggableContainer extends LitElement {
 
     disconnectedCallback() {
         super.disconnectedCallback();
-        document.removeEventListener('mousemove', this.handleMouseMove);
-        document.removeEventListener('mouseup', this.handleMouseUp);
+        document.removeEventListener('mousemove', this.handlePointerMove);
+        document.removeEventListener('touchmove', this.handlePointerMove);
+        document.removeEventListener('mouseup', this.handlePointerUp);
+        document.removeEventListener('touchend', this.handlePointerUp);
+        
         if (this.preventClickTimeout) {
             clearTimeout(this.preventClickTimeout);
         }
@@ -168,104 +173,97 @@ export class DraggableContainer extends LitElement {
         }
     }
 
-    // 检查是否为可交互元素或其子元素
+    // 简化的交互元素检测
     isInteractiveElement(element) {
         if (!element) return false;
         
-        // 检查元素标签
+        // 基本交互元素
         const interactiveTags = ['BUTTON', 'INPUT', 'SELECT', 'A', 'TEXTAREA'];
         if (interactiveTags.includes(element.tagName)) {
             return true;
         }
         
-        // 检查是否有拖拽忽略属性
-        if (element.hasAttribute && element.hasAttribute('draggable-ignore')) {
+        // 拖拽忽略属性
+        if (element.hasAttribute?.('draggable-ignore')) {
             return true;
         }
         
-        // 检查特定的类名
-        const interactiveClasses = [
-            'control-btn', 'play-btn', 'mode-btn', 'volume-btn', 'playlist-btn', 'close-btn',
-            'progress-container', 'volume-slider-container', 'playlist-popup', 'playlist-item',
-            'volume-controls', 'bottom-controls', 'playlist-container'
-        ];
-        
-        if (element.classList) {
-            for (const className of interactiveClasses) {
-                if (element.classList.contains(className)) {
-                    return true;
-                }
-            }
-        }
-        
-        // 检查是否为滑块或范围输入
-        if (element.type === 'range' || element.type === 'slider') {
-            return true;
-        }
-        
-        // 递归检查父元素（限制深度避免性能问题）
+        // 检查父元素（最多2层）
         let parent = element.parentElement;
-        let depth = 0;
-        while (parent && depth < 5) {
-            if (parent.classList) {
-                for (const className of interactiveClasses) {
-                    if (parent.classList.contains(className)) {
-                        return true;
-                    }
-                }
-            }
-            if (parent.hasAttribute && parent.hasAttribute('draggable-ignore')) {
+        for (let i = 0; i < 2 && parent; i++) {
+            if (interactiveTags.includes(parent.tagName) || 
+                parent.hasAttribute?.('draggable-ignore')) {
                 return true;
             }
             parent = parent.parentElement;
-            depth++;
         }
         
         return false;
     }
 
-    // 查找实际的目标元素（处理 Shadow DOM）
-    findActualTarget(e) {
-        // 使用 composedPath 来处理 Shadow DOM
-        const path = e.composedPath();
-        return path[0] || e.target;
+    // 统一的指针事件处理
+    getEventCoords(e) {
+        if (e.touches && e.touches[0]) {
+            return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
     }
 
-    handleMouseDown(e) {
-        const actualTarget = this.findActualTarget(e);
-        
-        // 如果点击的是交互元素，不启动拖拽
-        if (this.isInteractiveElement(actualTarget)) {
+    handlePointerDown(e) {
+        // 检查是否为交互元素
+        const target = e.composedPath?.()?.[0] || e.target;
+        if (this.isInteractiveElement(target)) {
             return;
         }
         
+        const coords = this.getEventCoords(e);
+        this.startDrag(coords.x, coords.y, e);
+    }
+
+    handlePointerMove(e) {
+        if (!this.isDragging) return;
+        
+        const coords = this.getEventCoords(e);
+        this.updateDrag(coords.x, coords.y);
+        
+        // 触摸事件且已拖拽时阻止默认行为
+        if (e.touches && this.hasDragged) {
+            e.preventDefault();
+        }
+    }
+
+    handlePointerUp() {
+        if (!this.isDragging) return;
+        this.endDrag();
+    }
+
+    // 简化的拖拽开始逻辑
+    startDrag(clientX, clientY, e) {
         this.isDragging = true;
         this.isInertia = false;
         this.hasDragged = false;
         
-        this.startPos.x = e.clientX;
-        this.startPos.y = e.clientY;
-        this.initialPos.x = this.x;
-        this.initialPos.y = this.y;
-        
-        this.lastPos.x = e.clientX;
-        this.lastPos.y = e.clientY;
+        this.startPos = { x: clientX, y: clientY };
+        this.initialPos = { x: this.x, y: this.y };
+        this.lastPos = { x: clientX, y: clientY };
         this.lastTime = Date.now();
-        this.velocity.x = 0;
-        this.velocity.y = 0;
+        this.velocity = { x: 0, y: 0 };
         
         this.toggleDraggingClass(true);
-        e.preventDefault();
+        
+        // 鼠标事件需要阻止默认行为
+        if (!e.touches) {
+            e.preventDefault();
+        }
     }
 
-    handleMouseMove(e) {
-        if (!this.isDragging) return;
+    // 简化的拖拽更新逻辑
+    updateDrag(clientX, clientY) {
+        const deltaX = clientX - this.startPos.x;
+        const deltaY = clientY - this.startPos.y;
         
-        const deltaX = e.clientX - this.startPos.x;
-        const deltaY = e.clientY - this.startPos.y;
-        
-        // 检查拖拽阈值
-        if (Math.sqrt(deltaX * deltaX + deltaY * deltaY) > this.dragThreshold) {
+        // 简化拖拽检测
+        if (!this.hasDragged && (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5)) {
             this.hasDragged = true;
         }
         
@@ -275,16 +273,12 @@ export class DraggableContainer extends LitElement {
             this.initialPos.y + deltaY
         );
         
-        this.x = newPos.x;
-        this.y = newPos.y;
-        this.updatePosition();
-        
-        this.updateVelocity(e.clientX, e.clientY);
+        this.setPosition(newPos.x, newPos.y);
+        this.updateVelocity(clientX, clientY);
     }
 
-    handleMouseUp() {
-        if (!this.isDragging) return;
-        
+    // 统一的拖拽结束逻辑
+    endDrag() {
         this.isDragging = false;
         this.toggleDraggingClass(false);
         
