@@ -7,9 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist",
-    "deploy:aliyun": "echo '请SSH到阿里云服务器执行: cd /www/projects/my && ./deploy.sh'",
-    "deploy:help": "echo '部署帮助: 1. git push origin main  2. ssh root@47.107.67.50  3. cd /www/projects/my && ./deploy.sh'"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "echarts": "^5.6.0",

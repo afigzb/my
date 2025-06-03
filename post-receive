@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Git post-receive hook
+# 当代码推送到服务器时自动触发部署
+
+echo "收到Git推送，准备自动部署..."
+
+# 切换到工作目录（项目实际目录）
+WORK_TREE="/www/git-repos/my"
+GIT_DIR="/www/git-repos/my.git"
+
+# 检出最新代码到工作目录
+git --git-dir="$GIT_DIR" --work-tree="$WORK_TREE" checkout -f
+
+# 切换到工作目录
+cd "$WORK_TREE"
+
+# 执行部署脚本
+echo "开始执行自动部署..."
+chmod +x deploy.sh
+./deploy.sh
+
+echo "自动部署完成！" 
