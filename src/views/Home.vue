@@ -6,7 +6,6 @@
 
       <!-- Hero 区域 - 立即加载 -->
       <HeroSection />
-      <div>111111111111</div>
 
       <!-- 技能展示区域 - 懒加载 -->
       <div class="skills-section" data-section="skills" ref="skillsRef">
