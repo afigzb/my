@@ -11,7 +11,7 @@ export const worksData = [
   {
     id: 'physics-bounce-follow',
     title: '物理回弹跟随组件教学',
-    description: '深度剖析基于胡克定律和阻尼力的Web物理动画实现。从物理学基础出发，详细讲解弹簧-质点-阻尼系统的数学模型，并展示如何将物理公式转化为流畅的前端动画。组件支持鼠标跟随、物理回弹、嵌套效果等特性，采用LitElement架构和高性能优化策略。教学内容涵盖力学计算、状态机设计、线性插值算法、事件节流优化等核心技术点，是学习物理动画和Web Components开发的完整教程。',
+    description: '基于胡克定律和阻尼力的Web物理动画实现。从物理学基础出发，详细讲解弹簧-质点-阻尼系统的数学模型，并展示如何将物理公式转化为流畅的前端动画。组件支持鼠标跟随、物理回弹、嵌套效果等特性，采用LitElement架构和高性能优化策略。教学内容涵盖力学计算、状态机设计、线性插值算法、事件节流优化等核心技术点，是学习物理动画和Web Components开发的完整教程。',
     demoUrl: '/demos/components/FocusDiv/FocusDiv.html',
     tags: ['Physics Animation', 'Web Components', 'LitElement', '教学'],
     image: '/img/弹性回弹.png'

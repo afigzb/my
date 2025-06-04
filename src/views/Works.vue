@@ -43,7 +43,7 @@
               class="page work-page"
             >
               <div class="work-content w-full max-w-420 h-full flex flex-col">
-                <a :href="work.demoUrl" target="_blank" class="work-image-link no-underline block" @click.stop>
+                <router-link :to="`/works/${work.id}`" class="work-image-link no-underline block" @click.stop>
                   <div class="work-image" @mousedown.stop>
                     <img :src="work.image" :alt="work.title" class="w-full h-full object-cover transition-transform duration-300" />
                     <div class="image-overlay">
@@ -56,7 +56,7 @@
                       </div>
                     </div>
                   </div>
-                </a>
+                </router-link>
                 <div class="work-info flex-1 flex flex-col text-left">
                   <h3 class="text-gray-700 text-xl font-semibold mb-3 leading-tight">{{ work.title }}</h3>
                   <p class="work-desc text-gray-500 text-sm leading-relaxed mb-5 flex-1">{{ work.description }}</p>
